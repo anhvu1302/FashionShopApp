@@ -82,6 +82,15 @@
             }
             return result;
         }
+        public bool checkkey(string s)
+        {
+            SqlCommand cmd = new SqlCommand(s, connection);
+            int count = (int)cmd.ExecuteScalar();
+            if (count > 0)
+                return false;
+            else
+                return true;
+        }
     }
 
 }
