@@ -278,6 +278,7 @@
     <None Include="Resources\delete.png" />
     <Content Include="Resources\feedback.png" />
     <Content Include="Resources\logout.png" />
+    <None Include="Resources\logo_shop.png" />
     <Content Include="Resources\order.png" />
     <Content Include="Resources\payment_method.png" />
     <None Include="Resources\reset.png" />

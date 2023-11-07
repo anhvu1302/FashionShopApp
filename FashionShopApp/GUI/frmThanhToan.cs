@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -37,38 +38,48 @@ namespace FashionShopApp.GUI
         }
         public void LoadCboTenSanPham()
         {
-            sql = "SELECT TenSanPham FROM SanPham";
-            DataTable dataTable = config.ExecuteSelectQuery(sql);
-
-            List<string> listIdSanPham = new List<string>();
-            if (dataTable.Rows.Count > 0)
+            sql = "SELECT IdSanPham,TenSanPham FROM SanPham ORDER BY IdSanPham ASC";
+            DataTable dt = config.ExecuteSelectQuery(sql);
+            List<object> items = new List<object>();
+            if (dt.Rows.Count > 0)
             {
-                foreach (DataRow row in dataTable.Rows)
+                foreach (DataRow dr in dt.Rows)
                 {
-                    listIdSanPham.Add(row[0].ToString());
+                    items.Add(new { Text = dr[1].ToString(), Value = dr[0] });
                 }
+
+                cbo_TenSanPham.DataSource = items;
+                cbo_TenSanPham.DisplayMember = "Text";
+                cbo_TenSanPham.ValueMember = "Value";
             }
             else
-                listIdSanPham.Add("Chưa có sản phẩm");
-            cbo_TenSanPham.DataSource = listIdSanPham;
+            {
+                items.Add(new { Text = "Chưa có sản phẩm", Value = -1 });
+            }
+
             cbo_TenSanPham.SelectedIndex = -1;
         }
         public void LoadCboChiNhanh()
         {
-            sql = "SELECT TenChiNhanh FROM ChiNhanh";
-            DataTable dataTable = config.ExecuteSelectQuery(sql);
-
-            List<string> listChiNhanh = new List<string>();
-            if (dataTable.Rows.Count > 0)
+            sql = "SELECT IdChiNhanh,TenChiNhanh FROM ChiNhanh ORDER BY IdChiNhanh ASC";
+            DataTable dt = config.ExecuteSelectQuery(sql);
+            List<object> items = new List<object>();
+            if (dt.Rows.Count > 0)
             {
-                foreach (DataRow row in dataTable.Rows)
+                foreach (DataRow dr in dt.Rows)
                 {
-                    listChiNhanh.Add(row[0].ToString());
+                    items.Add(new { Text = dr[1].ToString(), Value = dr[0] });
                 }
+
+                cbo_ChiNhanh.DataSource = items;
+                cbo_ChiNhanh.DisplayMember = "Text";
+                cbo_ChiNhanh.ValueMember = "Value";
             }
             else
-                listChiNhanh.Add("Chưa có chi nhánh");
-            cbo_ChiNhanh.DataSource = listChiNhanh;
+            {
+                items.Add(new { Text = "Chưa có chi nhánh", Value = -1 });
+            }
+
             cbo_ChiNhanh.SelectedIndex = -1;
         }
         public void FormThanhToan_Load(object sender, EventArgs e)
@@ -160,14 +171,14 @@ namespace FashionShopApp.GUI
                 ComboBox cmb = sender as ComboBox;
                 if (cmb.SelectedItem != null)
                 {
-                    sql = "SELECT IdLoaiSP, AnhSP, GiaBan, GiamGia FROM SanPham WHERE TenSanPham = N'" + cbo_TenSanPham.Text + "'";
+                    sql = string.Format("SELECT IdLoaiSP, AnhSP, GiaBan, GiamGia FROM SanPham WHERE IdSanPham = {0}", cbo_TenSanPham.SelectedValue);
                     DataTable dataTable = config.ExecuteSelectQuery(sql);
 
                     if (dataTable.Rows.Count > 0)
                     {
                         foreach (DataRow row in dataTable.Rows)
                         {
-                            txt_IdSanPham.Text = row[0].ToString();
+                            txt_IdSanPham.Text = cbo_TenSanPham.SelectedValue.ToString();
                             LoadImageIntoPictureBox(row[1].ToString(), ptb_SanPham);
                             int giaGoc = int.Parse(row[2].ToString());
                             txt_DonGia.Text = giaGoc.ToString();
@@ -189,7 +200,7 @@ namespace FashionShopApp.GUI
         }
         private void btnThemSanPham_Click(object sender, EventArgs e)
         {
-            if (cbo_TenSanPham.Text != "")
+            if (cbo_TenSanPham.SelectedIndex != -1)
             {
                 string idSanPham = txt_IdSanPham.Text;
                 string tenSanPham = cbo_TenSanPham.Text;
@@ -287,10 +298,10 @@ namespace FashionShopApp.GUI
                         {
                             if (!string.IsNullOrEmpty(txt_SoDienThoai.Text))
                             {
-                                sql = String.Format("INSERT INTO HoaDon VALUES ({0},{1},'{2}',N'{3}',GETDATE()) SELECT SCOPE_IDENTITY() AS IdHoaDon;", txt_IdNhanVien.Text, GetIdChiNhanh(cbo_ChiNhanh.Text), txt_SoDienThoai.Text, cbo_PtThanhToan.Text);
+                                sql = String.Format("INSERT INTO HoaDon VALUES ({0},{1},'{2}',N'{3}',GETDATE()) SELECT SCOPE_IDENTITY() AS IdHoaDon;", txt_IdNhanVien.Text, cbo_ChiNhanh.SelectedValue, txt_SoDienThoai.Text, cbo_PtThanhToan.Text);
                             }
                             else
-                                sql = String.Format("INSERT INTO HoaDon VALUES ({0},{1},null,N'{2}',GETDATE()) SELECT SCOPE_IDENTITY() AS IdHoaDon;", txt_IdNhanVien.Text, GetIdChiNhanh(cbo_ChiNhanh.Text), cbo_PtThanhToan.Text);
+                                sql = String.Format("INSERT INTO HoaDon VALUES ({0},{1},null,N'{2}',GETDATE()) SELECT SCOPE_IDENTITY() AS IdHoaDon;", txt_IdNhanVien.Text, cbo_ChiNhanh.SelectedValue, cbo_PtThanhToan.Text);
                             object result = config.ExecuteScalar(sql);
                             int id = int.Parse(result.ToString());
                             if (id > 0)
@@ -302,8 +313,10 @@ namespace FashionShopApp.GUI
                                 }
                             }
 
+
                         }
-                        MessageBox.Show("Đã mua hàng thành công", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        InHoaDon();
+                        MessageBox.Show("Đã xuất hoá đơn thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         ResetHoaDon();
                     }
                 }
@@ -317,37 +330,11 @@ namespace FashionShopApp.GUI
                 Console.WriteLine($"Lỗi: {ex.Message}");
             }
         }
-        private int GetIdChiNhanh(string tenChiNhanh)
-        {
-            int id = -1;
-            try
-            {
-                sql = String.Format("SELECT IdChiNhanh FROM ChiNhanh WHERE TenChiNhanh = N'{0}'", cbo_ChiNhanh.Text);
-                DataTable dataTable = config.ExecuteSelectQuery(sql);
-                if (dataTable.Rows.Count > 0)
-                {
-                    foreach (DataRow row in dataTable.Rows)
-                    {
-                        id = int.Parse(row[0].ToString());
-                    }
-                }
-                return id;
-            }
-            catch (SqlException ex)
-            {
-                Console.WriteLine($"Lỗi SQL: {ex.Message}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Lỗi: {ex.Message}");
-            }
-            return id;
-        }
         private void LoadImageIntoPictureBox(string imageName, PictureBox ptb)
         {
             try
             {
-                if(!string.IsNullOrEmpty(imageName))
+                if (!string.IsNullOrEmpty(imageName))
                 {
                     string folderPath = "Images";
                     string imagePath = System.IO.Path.Combine(folderPath, imageName);
@@ -368,6 +355,168 @@ namespace FashionShopApp.GUI
             {
                 MessageBox.Show("Đã xảy ra lỗi: " + ex.Message);
             }
+        }
+        private string GetDiaChiChiNhanh(int idChiNhanh)
+        {
+            string tenChiNhanh = string.Empty;
+            sql = string.Format("SELECT DiaChi FROM ChiNhanh WHERE IdChiNhanh = {0}", idChiNhanh);
+            DataTable dataTable = config.ExecuteSelectQuery(sql);
+            if (dataTable.Rows.Count > 0)
+            {
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    tenChiNhanh = row[0].ToString();
+                }
+            }
+            return tenChiNhanh;
+        }
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            Brush brush = Brushes.Black;
+
+            //logo
+            Image image = global::FashionShopApp.Properties.Resources.logo_shop;
+            e.Graphics.DrawImage(image, new Point((e.PageBounds.Width - image.Width) / 2, 15));
+            //Header
+            string txtHeader = "HÓA ĐƠN THANH TOÁN";
+            Font frontHeader = new Font("Arial", 24, FontStyle.Bold);
+            e.Graphics.DrawString(txtHeader, frontHeader, brush, new Point(centerRow(e, txtHeader, frontHeader), 110));
+
+            //Chi Nhánh
+            string txtChiNhanh = cbo_ChiNhanh.Text;
+            Font frontChiNhanh = new Font("Arial", 18, FontStyle.Bold);
+            e.Graphics.DrawString(txtChiNhanh, frontChiNhanh, brush, new Point(centerRow(e, txtChiNhanh, frontChiNhanh), 155));
+
+            //Tên Chi Nhánh
+            string txtTenChiNhanh = GetDiaChiChiNhanh(int.Parse(cbo_ChiNhanh.SelectedValue.ToString()));
+
+            Font frontTenChiNhanh = new Font("Arial", 14, FontStyle.Regular);
+            e.Graphics.DrawString(txtTenChiNhanh, frontTenChiNhanh, brush, new Point(centerRow(e, txtTenChiNhanh, frontTenChiNhanh), 190));
+
+            //Số điện thoại
+            string txtSDT = "Hotline: 111 222 3333";
+            Font frontSDT = new Font("Arial", 14, FontStyle.Bold);
+            e.Graphics.DrawString(txtSDT, frontSDT, brush, new Point(centerRow(e, txtSDT, frontSDT), 220));
+
+            //Nhân viên     
+            string txtNhanVien = "Nhân viên: " + txt_TenNhanVien.Text;
+            Font frontNhanVien = new Font("Arial", 12, FontStyle.Regular);
+            e.Graphics.DrawString(txtNhanVien, frontNhanVien, brush, new Point(10, 280));
+
+            //Thời gian xuất hóa đơn
+            DateTime gioXuatHD = dtpNgayBan.Value;
+            string txtGioXuatHD = "Thời gian xuất hóa đơn: " + gioXuatHD.ToString("HH:mm:ss dd/MM/yyyy");
+            Font frontGioXuatHD = new Font("Arial", 12, FontStyle.Regular);
+            e.Graphics.DrawString(txtGioXuatHD, frontGioXuatHD, brush, new Point(10, 300));
+
+            //Chuỗi ------------
+            string breakString = string.Empty;
+            for (int i = 10; i <= 150; i++)
+            {
+                breakString += "-";
+            }
+            Font frontBreakString = new Font("Arial", 12, FontStyle.Bold);
+            e.Graphics.DrawString(breakString, frontBreakString, brush, new Point(10, 330));
+
+            int y = 350;
+
+            foreach (ListViewItem item in lsvSanPham.Items)
+            {
+
+                //Tên sản phẩm
+                string txtTenSP = item.SubItems[1].Text;
+                Font frontTenSP = new Font("Arial", 12, FontStyle.Regular);
+                e.Graphics.DrawString(txtTenSP, frontTenSP, brush, new Point(10, y));
+
+                //Giảm giá
+                int giaGiam = int.Parse(item.SubItems[2].Text) - (int.Parse(item.SubItems[2].Text) * int.Parse(item.SubItems[4].Text) / 100);
+                string txtGiaGiam = string.Format("{0:n0}", giaGiam);
+                Font frontGiaGiam = new Font("Arial", 12, FontStyle.Regular);
+                e.Graphics.DrawString(txtGiaGiam, frontGiaGiam, brush, new Point(10, y + 20));
+                int giaGiamSize = (int)((SizeF)e.Graphics.MeasureString(txtGiaGiam, frontGiaGiam)).Width;
+
+                //Giá
+                string txtGia = string.Format("{0:n0}", int.Parse(item.SubItems[2].Text));
+                Font frontGia = new Font("Arial", 12, FontStyle.Strikeout);
+                e.Graphics.DrawString(txtGia, frontGia, brush, new Point(giaGiamSize + 20, y + 20));
+                int giaSize = (int)((SizeF)e.Graphics.MeasureString(txtGia, frontGia)).Width;
+
+                //Số lượng
+                string txtSoLuong = item.SubItems[3].Text;
+                Font frontSoLuong = new Font("Arial", 12, FontStyle.Regular);
+                e.Graphics.DrawString(txtSoLuong, frontSoLuong, brush, new Point(450, y + 20));
+
+                //ThanhTien
+                string txtThanhTien = string.Format("{0:n0}", int.Parse(item.SubItems[5].Text));
+                Font frontThanhTien = new Font("Arial", 12, FontStyle.Regular);
+                int thanhTienSize = (int)((SizeF)e.Graphics.MeasureString(txtThanhTien, frontThanhTien)).Width;
+                e.Graphics.DrawString(txtThanhTien, frontThanhTien, brush, new Point(e.PageBounds.Width - thanhTienSize - 15, y + 20));
+
+                y += 40;
+            }
+
+            //Chuỗi ------------
+            string breakString2 = string.Empty;
+            for (int i = 10; i <= 150; i++)
+            {
+                breakString2 += "-";
+            }
+            Font frontBreakString2 = new Font("Arial", 12, FontStyle.Bold);
+            e.Graphics.DrawString(breakString, frontBreakString, brush, new Point(10, y));
+
+
+
+            string txtTongCong = "TỔNG CỘNG";
+            Font frontTongCong = new Font("Arial", 18, FontStyle.Bold);
+            e.Graphics.DrawString(txtTongCong, frontTongCong, brush, new Point(10, y + 30));
+
+
+
+            //Số lượng
+            string txtDVT = "VNĐ";
+            Font frontDVT = new Font("Arial", 18, FontStyle.Bold);
+            e.Graphics.DrawString(txtDVT, frontDVT, brush, new Point(450, y + 30));
+
+            //ThanhTien
+            string txtTongThanhTien = txt_TongTien.Text;
+            Font frontTongThanhTien = new Font("Arial", 18, FontStyle.Bold);
+            int tongThanhTienSize = (int)((SizeF)e.Graphics.MeasureString(txtTongThanhTien, frontTongThanhTien)).Width;
+            e.Graphics.DrawString(txtTongThanhTien, frontTongThanhTien, brush, new Point(e.PageBounds.Width - tongThanhTienSize - 15, y + 30));
+        }
+        private int centerRow(System.Drawing.Printing.PrintPageEventArgs e, string text, Font font)
+        {
+            int pageWidth = e.PageBounds.Width;
+            SizeF textSize = e.Graphics.MeasureString(text, font);
+            int x = (int)((pageWidth - textSize.Width) / 2);
+            return x;
+        }
+        private void InHoaDon()
+        {
+            try
+            {
+                string downloadFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Downloads";
+                string filePath = Path.Combine(downloadFolderPath, "HoaDon.pdf");
+
+                PrintDocument printDocument = new PrintDocument();
+                printDocument.PrintPage += new PrintPageEventHandler(printDocument1_PrintPage);
+                printDocument.PrinterSettings.PrintToFile = true;
+                printDocument.PrinterSettings.PrintFileName = filePath;
+                printDocument.Print();
+
+                if (File.Exists(filePath))
+                {
+                    using (FileStream fs = new FileStream(filePath, FileMode.Create))
+                    {
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine($"Lỗi: {ex.Message}");
+            }
+
         }
     }
 }
