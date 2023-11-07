@@ -18,11 +18,12 @@ namespace FashionShopApp.GUI
         public frmLoaiSanPham()
         {
             InitializeComponent();
-
+        }
+        private void frmLoaiSanPham_Load(object sender, EventArgs e)
+        {
             LoadListLoaiSanPhamCha();
             LoadListLoaiSanPham();
             LoadCboLoaiSanPhamCha();
-
         }
         public void LoadCboLoaiSanPhamCha()
         {
@@ -195,5 +196,7 @@ namespace FashionShopApp.GUI
                 ResetLoaiSanPham();
             }
         }
+
+
     }
 }

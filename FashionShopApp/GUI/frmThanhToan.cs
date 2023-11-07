@@ -22,8 +22,6 @@ namespace FashionShopApp.GUI
         public frmThanhToan()
         {
             InitializeComponent();
-            LoadCboTenSanPham();
-            LoadCboChiNhanh();
 
             dtpNgayBan.Format = DateTimePickerFormat.Custom;
             dtpNgayBan.CustomFormat = "dd/MM/yyyy HH:mm:ss";
@@ -75,6 +73,8 @@ namespace FashionShopApp.GUI
         }
         public void FormThanhToan_Load(object sender, EventArgs e)
         {
+            LoadCboTenSanPham();
+            LoadCboChiNhanh();
             txt_IdSanPham.Text = null;
             cbo_TenSanPham.SelectedIndex = -1;
             nmud_SoLuong.Value = 1;

@@ -49,6 +49,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.dtp_NgayXuatHoaDon = new System.Windows.Forms.DateTimePicker();
             this.cbo_PtThanhToan = new System.Windows.Forms.ComboBox();
             this.txt_TongTien = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -76,7 +77,6 @@
             this.cbo_TenSanPham = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.dtp_NgayXuatHoaDon = new System.Windows.Forms.DateTimePicker();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -310,6 +310,17 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Thông tin hóa đơn";
             // 
+            // dtp_NgayXuatHoaDon
+            // 
+            this.dtp_NgayXuatHoaDon.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.dtp_NgayXuatHoaDon.Enabled = false;
+            this.dtp_NgayXuatHoaDon.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtp_NgayXuatHoaDon.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtp_NgayXuatHoaDon.Location = new System.Drawing.Point(230, 146);
+            this.dtp_NgayXuatHoaDon.Name = "dtp_NgayXuatHoaDon";
+            this.dtp_NgayXuatHoaDon.Size = new System.Drawing.Size(202, 34);
+            this.dtp_NgayXuatHoaDon.TabIndex = 40;
+            // 
             // cbo_PtThanhToan
             // 
             this.cbo_PtThanhToan.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -430,7 +441,7 @@
             this.groupBox2.Size = new System.Drawing.Size(535, 291);
             this.groupBox2.TabIndex = 37;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Danh sách loại sản phẩm cha";
+            this.groupBox2.Text = "Danh sách chi tiết hóa đơn";
             // 
             // btn_ResetChiTietHoaDon
             // 
@@ -634,17 +645,6 @@
             this.label1.TabIndex = 34;
             this.label1.Text = "QUẢN LÝ HÓA ĐƠN";
             // 
-            // dtp_NgayXuatHoaDon
-            // 
-            this.dtp_NgayXuatHoaDon.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.dtp_NgayXuatHoaDon.Enabled = false;
-            this.dtp_NgayXuatHoaDon.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtp_NgayXuatHoaDon.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtp_NgayXuatHoaDon.Location = new System.Drawing.Point(230, 146);
-            this.dtp_NgayXuatHoaDon.Name = "dtp_NgayXuatHoaDon";
-            this.dtp_NgayXuatHoaDon.Size = new System.Drawing.Size(202, 34);
-            this.dtp_NgayXuatHoaDon.TabIndex = 40;
-            // 
             // frmHoaDon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -658,6 +658,7 @@
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmHoaDon";
+            this.Load += new System.EventHandler(this.frmHoaDon_Load);
             this.groupBox4.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();

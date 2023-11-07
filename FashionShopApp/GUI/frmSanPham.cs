@@ -20,6 +20,10 @@ namespace FashionShopApp.GUI
         {
             InitializeComponent();
 
+
+        }
+        private void frmSanPham_Load(object sender, EventArgs e)
+        {
             LoadListSanPham();
             LoadCboLoaiSanPham();
             LoadCboTonTai();
@@ -290,7 +294,8 @@ namespace FashionShopApp.GUI
             }
             LoadListSanPham();
         }
-        
+
+
     }
 
 }

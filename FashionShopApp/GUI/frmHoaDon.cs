@@ -18,7 +18,9 @@ namespace FashionShopApp.GUI
         public frmHoaDon()
         {
             InitializeComponent();
-
+        }
+        private void frmHoaDon_Load(object sender, EventArgs e)
+        {
             LoadListHoaDon();
 
             LoadCboNhanVien();
@@ -29,7 +31,7 @@ namespace FashionShopApp.GUI
         private void LoadListHoaDon()
         {
             lsv_DanhSachHoaDon.Items.Clear();
-            sql = "SELECT HD.*,TenChiNhanh,TenNhanVien, dbo.TongTienHoaDon(IdHoaDon) AS TongTien FROM HoaDon HD INNER JOIN NhanVien NV ON HD.IdNhanVien = NV.IdNhanVien INNER JOIN ChiNhanh CN ON HD.IdChiNhanh = CN.IdChiNhanh ORDER BY IdHoaDon DESC";
+            sql = "SELECT HD.*,TenChiNhanh,TenNhanVien, dbo.func_TongTienHoaDon(IdHoaDon) AS TongTien FROM HoaDon HD INNER JOIN NhanVien NV ON HD.IdNhanVien = NV.IdNhanVien INNER JOIN ChiNhanh CN ON HD.IdChiNhanh = CN.IdChiNhanh ORDER BY IdHoaDon DESC";
             DataTable dt = config.ExecuteSelectQuery(sql);
             if (dt.Rows.Count > 0)
             {          
@@ -340,5 +342,7 @@ namespace FashionShopApp.GUI
                 txt_DonGia.Text = null;
 
         }
+
+
     }
 }
