@@ -112,11 +112,13 @@
             // 
             // columnHeader2
             // 
+            this.columnHeader2.DisplayIndex = 1;
             this.columnHeader2.Text = "Nhân viên";
             this.columnHeader2.Width = 106;
             // 
             // columnHeader3
             // 
+            this.columnHeader3.DisplayIndex = 2;
             this.columnHeader3.Text = "Chi nhánh";
             this.columnHeader3.Width = 136;
             // 

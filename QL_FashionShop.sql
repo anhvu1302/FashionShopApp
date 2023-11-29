@@ -441,10 +441,12 @@ CREATE TABLE HoaDon (
   CONSTRAINT FK_HoaDon_ChiNhanh FOREIGN KEY(IdChiNhanh) REFERENCES ChiNhanh(IdChiNhanh)
 );
 
-
+set dateformat dmy
+INSERT INTO HoaDon VALUES (1,1,'0393123456',N'Momo','21/01/2023');
+INSERT INTO HoaDon VALUES (2,2,'0979541478',N'Momo','20/07/2023');
 SELECT * FROM HoaDon
---====================================================================================================---
 
+--====================================================================================================---
 
 CREATE TABLE ChiTietHoaDon (
   IdHoaDon BIGINT NOT NULL,
@@ -458,9 +460,14 @@ CREATE TABLE ChiTietHoaDon (
   CONSTRAINT CHK_DonGia_ChiTietHoaDon CHECK(DonGia >= 0)
 );
 
+INSERT INTO ChiTietHoaDon VALUES (3,1,8,8792000);
+INSERT INTO ChiTietHoaDon VALUES (3,2,8,5070000);
+INSERT INTO ChiTietHoaDon VALUES (4,11,2,2598000);
+INSERT INTO ChiTietHoaDon VALUES (4,9,2,998000);
+INSERT INTO ChiTietHoaDon VALUES (4,12,1,699000);
+select *from ChiTietHoaDon
+
 --====================================================================================================---
-
-
 
 CREATE TABLE PhanHoi
 (
@@ -612,8 +619,10 @@ END;
 
 /* DECLARE @@IdHoaDon BIGINT = 1;
 SELECT dbo.TongTienHoaDon(@@IdHoaDon) AS TongTien; */
-
-
+--DECLARE @TONG INT
+--SET @TONG=DBO.TongTienHoaDon()
+--SELECT @TONG
+--
 GO
 
 CREATE FUNCTION TongTienDonHang(@IdDonhang BIGINT)

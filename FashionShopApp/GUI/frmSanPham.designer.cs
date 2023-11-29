@@ -76,12 +76,14 @@
             this.txt_IdSanPham = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.dgv = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmud_GiamGia)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptb_Image3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptb_Image2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptb_Image1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -98,6 +100,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.dgv);
             this.groupBox1.Controls.Add(this.lsv_SanPham);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(18, 387);
@@ -552,6 +555,16 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Mã sản phẩm";
             // 
+            // dgv
+            // 
+            this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv.Location = new System.Drawing.Point(410, 71);
+            this.dgv.Name = "dgv";
+            this.dgv.RowHeadersWidth = 51;
+            this.dgv.RowTemplate.Height = 24;
+            this.dgv.Size = new System.Drawing.Size(979, 140);
+            this.dgv.TabIndex = 1;
+            // 
             // frmSanPham
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -571,6 +584,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ptb_Image3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptb_Image2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptb_Image1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -625,5 +639,6 @@
         private System.Windows.Forms.ComboBox cbo_LoaiSanPham;
         private System.Windows.Forms.TextBox txt_ThanhToanVanChuyen;
         private System.Windows.Forms.Button btn_Reset;
+        private System.Windows.Forms.DataGridView dgv;
     }
 }

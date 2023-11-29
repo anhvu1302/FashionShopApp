@@ -163,11 +163,13 @@ namespace FashionShopApp
         }
         private void sbtn_QLKhachHang_Click(object sender, EventArgs e)
         {
-
+            closeForm();
+            showFrm(new frmKhachHang());
         }
         private void sbtn_QLTaiKhoanKhachHang_Click(object sender, EventArgs e)
         {
-
+            closeForm();
+            showFrm(new frmTK_KhachHang());
         }
         private void sbtn_DonHang_Click(object sender, EventArgs e)
         {
@@ -325,7 +327,8 @@ namespace FashionShopApp
 
         private void sbtn_PhanHoiCuaKH_Click(object sender, EventArgs e)
         {
-
+            closeForm();
+            showFrm(new frmPhanHoi());
         }
         private void sbtn_ChiNhanh_Click(object sender, EventArgs e)
         {

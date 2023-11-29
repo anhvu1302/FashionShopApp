@@ -3,10 +3,13 @@
     using System;
     using System.Data;
     using System.Data.SqlClient;
+    using System.Drawing;
 
     public class SQLConfig
     {
-        SqlConnection connection = new SqlConnection("Server=VANANH;Database=QL_FashionShop;User Id=sa;Password=123;");
+        //SqlConnection connection = new SqlConnection("Server=VANANH;Database=QL_FashionShop;User Id=sa;Password=123;");
+        SqlConnection connection = new SqlConnection("Data Source=DESKTOP-1LB6J34\\SQLEXPRESS;Initial Catalog=QL_FashionShop;Integrated Security=True");
+
         //Truy vấn
         public bool ExecuteNonQuery(string query)
         {
@@ -81,15 +84,6 @@
                 connection.Close();
             }
             return result;
-        }
-        public bool checkkey(string s)
-        {
-            SqlCommand cmd = new SqlCommand(s, connection);
-            int count = (int)cmd.ExecuteScalar();
-            if (count > 0)
-                return false;
-            else
-                return true;
         }
     }
 

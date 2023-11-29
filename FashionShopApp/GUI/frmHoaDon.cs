@@ -31,7 +31,7 @@ namespace FashionShopApp.GUI
         private void LoadListHoaDon()
         {
             lsv_DanhSachHoaDon.Items.Clear();
-            sql = "SELECT HD.*,TenChiNhanh,TenNhanVien, dbo.func_TongTienHoaDon(IdHoaDon) AS TongTien FROM HoaDon HD INNER JOIN NhanVien NV ON HD.IdNhanVien = NV.IdNhanVien INNER JOIN ChiNhanh CN ON HD.IdChiNhanh = CN.IdChiNhanh ORDER BY IdHoaDon DESC";
+            sql = "SELECT HD.*,TenNhanVien,TenChiNhanh, dbo.func_TongTienHoaDon(IdHoaDon) AS TongTien FROM HoaDon HD INNER JOIN NhanVien NV ON HD.IdNhanVien = NV.IdNhanVien INNER JOIN ChiNhanh CN ON HD.IdChiNhanh = CN.IdChiNhanh ORDER BY IdHoaDon DESC";
             DataTable dt = config.ExecuteSelectQuery(sql);
             if (dt.Rows.Count > 0)
             {          
@@ -193,7 +193,7 @@ namespace FashionShopApp.GUI
 
             if (confirmationResult == DialogResult.Yes)
             {
-                sql = string.Format("UPDATE HoaDon SET IdNhanVien = {0}, IdChiNhanh = {1}, SoDienThoai = '{2}', PhuongThucThanhToan = N'{3}' WHERE IdHoaDon = {4}", cbo_NhanVien.SelectedValue, cbo_ChiNhanh.SelectedValue, txt_SoDienThoai.Text, cbo_PtThanhToan.SelectedValue, txt_IdHoaDon.Text);
+                sql = string.Format("UPDATE HoaDon SET IdNhanVien = {0}, IdChiNhanh = {1}, SoDienThoai = '{2}', PhuongThucThanhToan = N'{3}' WHERE IdHoaDon = {4}", cbo_NhanVien.SelectedValue, cbo_ChiNhanh.SelectedValue, txt_SoDienThoai.Text, cbo_PtThanhToan.Text, txt_IdHoaDon.Text);
                 config.ExecuteNonQuery(sql);
                 LoadListHoaDon();
                 LoadCboTenSanPham();

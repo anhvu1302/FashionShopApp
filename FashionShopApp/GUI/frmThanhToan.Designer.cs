@@ -478,6 +478,11 @@
             // 
             this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
             // 
+            // printPreviewDialog1
+            // 
+            resources.ApplyResources(this.printPreviewDialog1, "printPreviewDialog1");
+            this.printPreviewDialog1.Name = "printPreviewDialog1";
+            // 
             // frmThanhToan
             // 
             resources.ApplyResources(this, "$this");

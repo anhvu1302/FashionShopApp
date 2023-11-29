@@ -27,6 +27,7 @@ namespace FashionShopApp.GUI
             LoadListSanPham();
             LoadCboLoaiSanPham();
             LoadCboTonTai();
+            loadSanPhamDGV();
         }
         public void LoadCboLoaiSanPham()
         {
@@ -98,7 +99,24 @@ namespace FashionShopApp.GUI
 
             }
         }
+        void loadSanPhamDGV()
+        {
+            sql = "SELECT S.*, TenLoaiSP FROM SanPham S INNER JOIN LoaiSanPham L ON S.IdLoaiSP = L.IdLoaiSP ORDER BY IdSanPham DESC;";
+            DataTable dt = config.ExecuteSelectQuery(sql);
 
+            dgv.DataSource = dt;
+            dgv.Columns[0].HeaderText = "Mã sản phẩm";
+            dgv.Columns[1].HeaderText = "Tên sản phẩm";
+            dgv.Columns[2].HeaderText = "Loại sản phẩm";
+            dgv.Columns[3].HeaderText = "Ảnh";
+
+            dgv.Columns[4].HeaderText = "Giới tính";
+            dgv.Columns[5].HeaderText = "Địa chỉ";
+            dgv.Columns[6].HeaderText = "Số ĐT";
+            dgv.Columns[7].HeaderText = "Email";
+            dgv.AllowUserToAddRows = false;
+
+        }
         private void lsv_SanPham_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lsv_SanPham.SelectedItems.Count > 0)

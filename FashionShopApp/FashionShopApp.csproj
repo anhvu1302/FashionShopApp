@@ -47,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GUI\frmPhanHoi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmPhanHoi.Designer.cs">
+      <DependentUpon>frmPhanHoi.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\frmHoaDon.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +95,12 @@
     <Compile Include="GUI\frmThanhToan.Designer.cs">
       <DependentUpon>frmThanhToan.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\frmTK_KhachHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmTK_KhachHang.Designer.cs">
+      <DependentUpon>frmTK_KhachHang.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\ChiNhanh.cs" />
     <Compile Include="Model\ChiTietDonHang.cs" />
     <Compile Include="Model\ChiTietHoaDonNhapKho.cs" />
@@ -109,6 +121,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\SQLConfig.cs" />
+    <EmbeddedResource Include="GUI\frmPhanHoi.resx">
+      <DependentUpon>frmPhanHoi.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmHoaDon.resx">
       <DependentUpon>frmHoaDon.cs</DependentUpon>
     </EmbeddedResource>
@@ -129,6 +144,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmThanhToan.resx">
       <DependentUpon>frmThanhToan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmTK_KhachHang.resx">
+      <DependentUpon>frmTK_KhachHang.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -277,6 +295,8 @@
     <Content Include="Resources\branch.png" />
     <None Include="Resources\delete.png" />
     <Content Include="Resources\feedback.png" />
+    <None Include="Resources\icons8-save-30.png" />
+    <None Include="Resources\icons8-sent-30.png" />
     <Content Include="Resources\logout.png" />
     <None Include="Resources\logo_shop.png" />
     <Content Include="Resources\order.png" />
