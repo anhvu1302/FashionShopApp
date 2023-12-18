@@ -13,7 +13,7 @@ namespace FashionShopApp.GUI
 {
     public partial class frmLoaiSanPham : Form
     {
-        SQLConfig config = new SQLConfig();
+        SQLConfig config = new SQLConfig(NguoiDungHienTai.CurentUser.nguoiDung.TenTaiKhoan, NguoiDungHienTai.CurentUser.nguoiDung.MatKhau);
         string sql;
         public frmLoaiSanPham()
         {
@@ -91,7 +91,14 @@ namespace FashionShopApp.GUI
             if(txt_TenLoaiSanPhamCha.Text.Length > 0)
             {
                 sql = string.Format("INSERT INTO LoaiSanPhamCha VALUES (N'{0}')", txt_TenLoaiSanPhamCha.Text);
-                config.ExecuteNonQuery(sql);                
+                if (config.ExecuteNonQuery(sql))
+                {
+                    MessageBox.Show("Thêm sản phẩm loại cha thành công", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Thêm sản phẩm loại cha không thành công", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 LoadListLoaiSanPhamCha();
             }
             else
@@ -105,7 +112,14 @@ namespace FashionShopApp.GUI
             if (confirmationResult == DialogResult.Yes)
             {
                 sql = string.Format("UPDATE LoaiSanPhamCha SET TenLoaiSPCha = N'{0}' WHERE IdLoaiSPCha = {1}", txt_TenLoaiSanPhamCha.Text, txt_IdLoaiSanPhamCha.Text);
-                config.ExecuteNonQuery(sql);
+                if (config.ExecuteNonQuery(sql))
+                {
+                    MessageBox.Show("Cập nhập thông tin sản phẩm loại cha thành công", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Cập nhập thông tin sản phẩm loại cha không thành công", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 LoadListLoaiSanPhamCha();
             }
         }
@@ -116,7 +130,14 @@ namespace FashionShopApp.GUI
             if (confirmationResult == DialogResult.Yes)
             {
                 sql = string.Format("DELETE LoaiSanPhamCha WHERE IdLoaiSPCha = {0}", txt_IdLoaiSanPhamCha.Text);
-                config.ExecuteNonQuery(sql);
+                if (config.ExecuteNonQuery(sql))
+                {
+                    MessageBox.Show("Xoá thông tin sản phẩm loại cha thành công", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Xoá thông tin sản phẩm loại cha không thành công", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 LoadListLoaiSanPhamCha();
             }
         }
@@ -136,6 +157,14 @@ namespace FashionShopApp.GUI
             {
                 sql = string.Format("INSERT INTO LoaiSanPham VALUES (N'{0}',{1})", txt_TenLoaiSanPham.Text,cbo_LoaiSanPhamCha.SelectedValue);
                 config.ExecuteNonQuery(sql);
+                if (config.ExecuteNonQuery(sql))
+                {
+                    MessageBox.Show("Thêm loại sản phẩm thành công", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Thêm loại sản phẩm không thành công", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 LoadListLoaiSanPham();
             }
             else
@@ -150,7 +179,14 @@ namespace FashionShopApp.GUI
             if (confirmationResult == DialogResult.Yes)
             {
                 sql = string.Format("UPDATE LoaiSanPham SET TenLoaiSP = N'{0}', IdLoaiSpCha = {1} WHERE IdLoaiSP = {2}", txt_TenLoaiSanPham.Text, cbo_LoaiSanPhamCha.SelectedValue, txt_IdLoaiSanPham.Text);
-                config.ExecuteNonQuery(sql);
+                if (config.ExecuteNonQuery(sql))
+                {
+                    MessageBox.Show("Cập nhật loại sản phẩm thành công", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Cập nhật loại sản phẩm không thành công", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 LoadListLoaiSanPhamCha();
             }
         }
@@ -161,7 +197,14 @@ namespace FashionShopApp.GUI
             if (confirmationResult == DialogResult.Yes)
             {
                 sql = string.Format("DELETE LoaiSanPham WHERE IdLoaiSP = {0}", txt_IdLoaiSanPham.Text);
-                config.ExecuteNonQuery(sql);
+                if (config.ExecuteNonQuery(sql))
+                {
+                    MessageBox.Show("Xoá loại sản phẩm thành công", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Xoá loại sản phẩm không thành công", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 LoadListLoaiSanPham();
             }
         }

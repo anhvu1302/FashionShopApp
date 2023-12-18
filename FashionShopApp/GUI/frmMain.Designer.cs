@@ -32,11 +32,9 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.sbtn_SanPham = new System.Windows.Forms.ToolStripButton();
             this.sbtn_KhachHang = new System.Windows.Forms.ToolStripButton();
-            this.sbtn_DonHang = new System.Windows.Forms.ToolStripButton();
             this.sbtn_HoaDon = new System.Windows.Forms.ToolStripButton();
             this.sbtn_NhanVien = new System.Windows.Forms.ToolStripButton();
             this.sbtn_PhanHoi = new System.Windows.Forms.ToolStripButton();
-            this.sbtn_ChiNhanh = new System.Windows.Forms.ToolStripButton();
             this.sbtn_Kho = new System.Windows.Forms.ToolStripButton();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
@@ -66,11 +64,9 @@
             this.sbtn_Dashboard,
             this.sbtn_SanPham,
             this.sbtn_KhachHang,
-            this.sbtn_DonHang,
             this.sbtn_HoaDon,
             this.sbtn_NhanVien,
             this.sbtn_PhanHoi,
-            this.sbtn_ChiNhanh,
             this.sbtn_Kho});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -99,17 +95,6 @@
             this.sbtn_KhachHang.Size = new System.Drawing.Size(121, 32);
             this.sbtn_KhachHang.Text = "Khách Hàng";
             this.sbtn_KhachHang.Click += new System.EventHandler(this.sbtn_KhachHang_Click);
-            // 
-            // sbtn_DonHang
-            // 
-            this.sbtn_DonHang.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sbtn_DonHang.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(54)))), ((int)(((byte)(137)))));
-            this.sbtn_DonHang.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.sbtn_DonHang.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.sbtn_DonHang.Name = "sbtn_DonHang";
-            this.sbtn_DonHang.Size = new System.Drawing.Size(105, 32);
-            this.sbtn_DonHang.Text = "Đơn Hàng";
-            this.sbtn_DonHang.Click += new System.EventHandler(this.sbtn_DonHang_Click);
             // 
             // sbtn_HoaDon
             // 
@@ -143,17 +128,6 @@
             this.sbtn_PhanHoi.Size = new System.Drawing.Size(95, 32);
             this.sbtn_PhanHoi.Text = "Phản Hồi";
             this.sbtn_PhanHoi.Click += new System.EventHandler(this.sbtn_PhanHoi_Click);
-            // 
-            // sbtn_ChiNhanh
-            // 
-            this.sbtn_ChiNhanh.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sbtn_ChiNhanh.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(54)))), ((int)(((byte)(137)))));
-            this.sbtn_ChiNhanh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.sbtn_ChiNhanh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.sbtn_ChiNhanh.Name = "sbtn_ChiNhanh";
-            this.sbtn_ChiNhanh.Size = new System.Drawing.Size(107, 32);
-            this.sbtn_ChiNhanh.Text = "Chi Nhánh";
-            this.sbtn_ChiNhanh.Click += new System.EventHandler(this.sbtn_ChiNhanh_Click);
             // 
             // sbtn_Kho
             // 
@@ -241,12 +215,10 @@
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton sbtn_SanPham;
         private System.Windows.Forms.ToolStripButton sbtn_KhachHang;
-        private System.Windows.Forms.ToolStripButton sbtn_DonHang;
         private System.Windows.Forms.ToolStripButton sbtn_HoaDon;
         private System.Windows.Forms.ToolStripButton sbtn_NhanVien;
         private System.Windows.Forms.ToolStripButton sbtn_PhanHoi;
         private System.Windows.Forms.ToolStripButton sbtn_Kho;
-        private System.Windows.Forms.ToolStripButton sbtn_ChiNhanh;
         private System.Windows.Forms.ToolStrip toolStrip3;
         private System.Windows.Forms.ToolStripButton sbtn_DangXuat;
         private System.Windows.Forms.ToolStripLabel lb_CurrentUserName;

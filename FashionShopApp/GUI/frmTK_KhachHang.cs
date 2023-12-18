@@ -13,7 +13,7 @@ namespace FashionShopApp.GUI
 {
     public partial class frmTK_KhachHang : Form
     {
-        SQLConfig config = new SQLConfig();
+        SQLConfig config = new SQLConfig(NguoiDungHienTai.CurentUser.nguoiDung.TenTaiKhoan, NguoiDungHienTai.CurentUser.nguoiDung.MatKhau);
         string sql;
         DataSet ds_tk = new DataSet();
         public frmTK_KhachHang()
@@ -33,11 +33,14 @@ namespace FashionShopApp.GUI
             //sql = "select IdNguoiDung,TenTaiKhoan,MatKhau,TonTai,Cam from NguoiDung where IdVaiTro=4";
             DataTable dt = config.ExecuteSelectQuery(sql);
             dgv.DataSource = dt;
-            dgv.Columns[0].HeaderText = "Mã Người dùng";
-            dgv.Columns[1].HeaderText = "Tên Tài Khoản";
-            dgv.Columns[2].HeaderText = "Mật Khẩu";
-            dgv.Columns[3].HeaderText = "Tồn tại";
-            dgv.Columns[4].HeaderText = "Khoá";
+            if (dt.Rows.Count > 0)
+            {
+                dgv.Columns[0].HeaderText = "Mã Người dùng";
+                dgv.Columns[1].HeaderText = "Tên Tài Khoản";
+                dgv.Columns[2].HeaderText = "Mật Khẩu";
+                dgv.Columns[3].HeaderText = "Tồn tại";
+                dgv.Columns[4].HeaderText = "Cấm";
+            }
             //dgv.AllowUserToAddRows = false;
         }
         void loadTKKhachHang()
@@ -45,11 +48,14 @@ namespace FashionShopApp.GUI
             sql = "select IdNguoiDung,TenTaiKhoan,MatKhau,TonTai,Cam from NguoiDung where IdVaiTro=4";
             DataTable dt = config.ExecuteSelectQuery(sql);
             dgv.DataSource = dt;
-            dgv.Columns[0].HeaderText = "Mã Người dùng";
-            dgv.Columns[1].HeaderText = "Tên Tài Khoản";
-            dgv.Columns[2].HeaderText = "Mật Khẩu";
-            dgv.Columns[3].HeaderText = "Tồn tại";
-            dgv.Columns[4].HeaderText = "Khoá";
+            if (dt.Rows.Count > 0)
+            {
+                dgv.Columns[0].HeaderText = "Mã Người dùng";
+                dgv.Columns[1].HeaderText = "Tên Tài Khoản";
+                dgv.Columns[2].HeaderText = "Mật Khẩu";
+                dgv.Columns[3].HeaderText = "Tồn tại";
+                dgv.Columns[4].HeaderText = "Cấm";
+            }
             dgv.AllowUserToAddRows = false;
         }
         private void btn_Luu_Click(object sender, EventArgs e)
@@ -65,7 +71,7 @@ namespace FashionShopApp.GUI
             int kq = int.Parse(check.ToString());
             if (kq <= 0)
             {
-                sql = string.Format("INSERT INTO NguoiDung VALUES('{0}','{1}',4,1,0)",
+                sql = string.Format("exec ThemTaiKhoanKH '{0}','{1}'",
                             txt_tenTK.Text,
                             txt_matkhau.Text);
                 config.ExecuteNonQuery(sql);
@@ -111,12 +117,12 @@ namespace FashionShopApp.GUI
                 if (kq > 0)
                 {
                     MessageBox.Show("Không thể xoá Người Dùng này", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    txt_IdAcc.Focus();
+                    txt_tenTK.Focus();
                     return;
                 }
                 else
                 {
-                    sql = string.Format("DELETE NguoiDung WHERE IdNguoiDung = {0}", txt_IdAcc.Text);
+                    sql = string.Format("exec XoaTaiKhoanKH '{0}'", txt_tenTK.Text);
                     config.ExecuteNonQuery(sql);
                     loadTKKhachHang();
                 }    
@@ -130,7 +136,7 @@ namespace FashionShopApp.GUI
 
             if (confirmationResult == DialogResult.Yes)
             {
-                sql = string.Format("UPDATE NguoiDung SET TenTaiKhoan = '{0}',MatKhau='{1}'  WHERE IdNguoiDung = {2}", txt_tenTK.Text, txt_matkhau.Text,txt_IdAcc.Text);
+                sql = string.Format("UPDATE NguoiDung SET MatKhau='{0}',TonTai='{1}',Cam='{2}'  WHERE IdNguoiDung = {3}", txt_matkhau.Text,chk_tontai.Checked,chk_Ban.Checked,txt_IdAcc.Text);
                 config.ExecuteNonQuery(sql);
                 loadTKKhachHang();
             }
@@ -146,6 +152,8 @@ namespace FashionShopApp.GUI
             txt_IdAcc.Text = string.Empty;
             txt_tenTK.Text = string.Empty;
             txt_matkhau.Text = string.Empty;
+            chk_Ban.Checked = false;
+            chk_tontai.Checked = false;
         }
         private void dgv_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -155,6 +163,8 @@ namespace FashionShopApp.GUI
                 txt_IdAcc.Text = dgv.Rows[index].Cells[0].Value.ToString();
                 txt_tenTK.Text = dgv.Rows[index].Cells[1].Value.ToString();
                 txt_matkhau.Text = dgv.Rows[index].Cells[2].Value.ToString();
+                chk_tontai.Checked = Convert.ToBoolean(dgv.Rows[index].Cells[3].Value.ToString());
+                chk_Ban.Checked = Convert.ToBoolean(dgv.Rows[index].Cells[4].Value.ToString());
             }
         }
 

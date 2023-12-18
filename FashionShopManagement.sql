@@ -1,15 +1,16 @@
 ﻿USE master
 GO
-DROP DATABASE QL_FashionShop
+DROP DATABASE FashionShopManagement
 
 
-CREATE DATABASE QL_FashionShop
+CREATE DATABASE FashionShopManagement
 GO
-USE QL_FashionShop
+USE FashionShopManagement
 
 GO
 
 --====================================================================================================---
+------------------------------------------Nguyễn Quốc Bảo----------------------------------------
 CREATE TABLE VaiTro (
     IdVaiTro INT IDENTITY(1,1),
     TenVaiTro NVARCHAR(255) NOT NULL,
@@ -110,7 +111,8 @@ CREATE TABLE KhachHang
 	CONSTRAINT UNI_IdNguoiDung_KhachHang UNIQUE(IdNguoiDung),
 	CONSTRAINT UNI_SoDienThoai_KhachHang UNIQUE(SoDienThoai),
 	CONSTRAINT UNI_Email_KhachHang UNIQUE(Email),
-	CONSTRAINT FK_KhachHang_NguoiDung FOREIGN KEY(IdNguoiDung) REFERENCES NguoiDung(IdNguoiDung),
+	CONSTRAINT CHK_GioiTinh_KH CHECK (GioiTinh=N'Nam' OR GioiTinh=N'Nữ'),
+	CONSTRAINT FK_KhachHang_NguoiDung FOREIGN KEY(IdNguoiDung) REFERENCES NguoiDung(IdNguoiDung)
 	
 );
 ALTER TABLE KhachHang
@@ -178,6 +180,7 @@ CREATE TABLE NhanVien
 	Email VARCHAR(100),
 	CONSTRAINT PK_NhanVien PRIMARY KEY(IdNhanVien),
 	CONSTRAINT UNI_IdNguoiDung_NhanVien UNIQUE(IdNguoiDung),
+	CONSTRAINT CHK_GioiTinh_NV CHECK (GioiTinh=N'Nam' OR GioiTinh=N'Nữ'),
 	CONSTRAINT UNI_SoDienThoai_NhanVien UNIQUE(SoDienThoai),
 	CONSTRAINT UNI_Email_NhanVien UNIQUE(Email),
 	CONSTRAINT FK_NhanVien_NguoiDung FOREIGN KEY(IdNguoiDung) REFERENCES NguoiDung(IdNguoiDung)
@@ -208,6 +211,9 @@ INSERT INTO LoaiSanPhamCha VALUES (N'Trẻ em');
 INSERT INTO LoaiSanPhamCha VALUES (N'Phụ Kiện');
 SELECT * FROM LoaiSanPhamCha
 --====================================================================================================---
+--------------------------------------Hà Tri Thuỷ--------------------------------------------
+
+
 CREATE TABLE LoaiSanPham
 (
 	IdLoaiSP INT IDENTITY(1,1),
@@ -312,8 +318,7 @@ CREATE TABLE DonHang (
   TrangThaiThanhToan NVARCHAR(30)NOT NULL,
   CONSTRAINT PK_DonHang PRIMARY KEY(IdDonHang),
   CONSTRAINT FK_DonHang_KhachHang FOREIGN KEY(IdKhachHang) REFERENCES KhachHang(IdKhachHang),
-  CONSTRAINT CHK_NgayDatHang CHECK(ThoiGianDatHang <= ThoiGianGiaoHangDuKien),
-  CONSTRAINT CHK_NgayGiaoHangDuKien CHECK(ThoiGianGiaoHangDuKien >= ThoiGianDatHang),
+  CONSTRAINT CHK_NgayDatHang_NgayGiao CHECK(ThoiGianDatHang <= ThoiGianGiaoHangDuKien)
 );
 ALTER TABLE DonHang
 ADD CONSTRAINT DF_TrangThaiDonHang DEFAULT N'Chờ xử lý' FOR TrangThaiDonHang;
@@ -379,9 +384,11 @@ CREATE TABLE ChiNhanh
 	IdChiNhanh INT IDENTITY(1,1),
 	TenChiNhanh NVARCHAR(100) NOT NULL,
 	DiaChi NVARCHAR(255) NOT NULL,
-	CONSTRAINT PK_ChiNhanh PRIMARY KEY(IdChiNhanh)
+	CONSTRAINT PK_ChiNhanh PRIMARY KEY(IdChiNhanh),
+	CONSTRAINT UNI_TenChiNhanh UNIQUE(TenChiNhanh)
 )
-
+ALTER TABLE ChiNhanh
+ADD CONSTRAINT DF_DiaChi_ChiNhanh DEFAULT N'Không xác định' FOR DiaChi;
 
 INSERT INTO ChiNhanh VALUES(N'Chi Nhánh Trường Chinh',N'2 Trường Chinh, Tây Thạnh, Tân Phú, Thành phố Hồ Chí Minh');
 INSERT INTO ChiNhanh VALUES(N'Chi Nhánh Nguyễn Hữu Cảnh',N'67 Đ. Nguyễn Hữu Cảnh, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh');
@@ -401,10 +408,44 @@ CREATE TABLE Kho
 	CONSTRAINT PK_Kho PRIMARY KEY(IdChiNhanh, IdSanPham),
 	CONSTRAINT FK_Kho_ChiNhanh FOREIGN KEY(IdChiNhanh) REFERENCES ChiNhanh(IdChiNhanh),
 	CONSTRAINT FK_Kho_SanPham FOREIGN KEY(IdSanPham) REFERENCES SanPham(IdSanPham),
+	CONSTRAINT CHK_SoLuongTonKho Check(SoLuongTonKho >=0)
 )
-
+INSERT INTO Kho VALUES(1, 1, 50)
+INSERT INTO Kho VALUES(1, 2, 50)
+INSERT INTO Kho VALUES(1, 3, 50)
+INSERT INTO Kho VALUES(1, 4, 50)
+INSERT INTO Kho VALUES(1, 5, 50)
+INSERT INTO Kho VALUES(1, 6, 50)
+INSERT INTO Kho VALUES(1, 7, 50)
+INSERT INTO Kho VALUES(1, 8, 50)
+INSERT INTO Kho VALUES(1, 9, 50)
+INSERT INTO Kho VALUES(1, 10, 50)
+INSERT INTO Kho VALUES(1, 11, 50)
+INSERT INTO Kho VALUES(1, 12, 50)
+INSERT INTO Kho VALUES(1, 13, 50)
+INSERT INTO Kho VALUES(1, 14, 50)
+INSERT INTO Kho VALUES(1, 15, 50)
+INSERT INTO Kho VALUES(1, 16, 50)
+INSERT INTO Kho VALUES(1, 17, 50)
+INSERT INTO Kho VALUES(1, 18, 50)
+INSERT INTO Kho VALUES(1, 19, 50)
+INSERT INTO Kho VALUES(1, 20, 50)
+INSERT INTO Kho VALUES(1, 21, 50)
+INSERT INTO Kho VALUES(1, 22, 50)
+INSERT INTO Kho VALUES(1, 23, 50)
+INSERT INTO Kho VALUES(1, 24, 50)
+INSERT INTO Kho VALUES(1, 25, 50)
+INSERT INTO Kho VALUES(1, 26, 50)
+INSERT INTO Kho VALUES(1, 27, 50)
+INSERT INTO Kho VALUES(1, 28, 50)
+INSERT INTO Kho VALUES(1, 29, 50)
+INSERT INTO Kho VALUES(1, 30, 50)
+INSERT INTO Kho VALUES(1, 31, 50)
+INSERT INTO Kho VALUES(1, 32, 50)
+Select * from Kho
+delete kho
 --====================================================================================================---
-
+---------------------------------------------Vũ Văn Anh-------------------------------------------
 CREATE TABLE HoaDonNhapKho
 (
     IdHoaDonNhapKho BIGINT IDENTITY(1,1),
@@ -416,7 +457,6 @@ CREATE TABLE HoaDonNhapKho
     CONSTRAINT FK_HoaDonNhapKho_NhanVien FOREIGN KEY(IdNhanVien) REFERENCES NhanVien(IdNhanVien)
 );
 
-
 --====================================================================================================---
 
 CREATE TABLE ChiTietHoaDonNhapKho (
@@ -425,8 +465,10 @@ CREATE TABLE ChiTietHoaDonNhapKho (
   SoLuong INT,
   CONSTRAINT PK_ChiTietHoaDonNhapKho PRIMARY KEY(IdHoaDonNhapKho, IdSanPham),
   CONSTRAINT FK_ChiTietHoaDonNhapKho_HoaDonNhapKho FOREIGN KEY(IdHoaDonNhapKho) REFERENCES HoaDonNhapKho(IdHoaDonNhapKho),
-  CONSTRAINT FK_ChiTietHoaDonNhapKho_SanPham FOREIGN KEY(IdSanPham) REFERENCES SanPham(IdSanPham)
+  CONSTRAINT FK_ChiTietHoaDonNhapKho_SanPham FOREIGN KEY(IdSanPham) REFERENCES SanPham(IdSanPham),
+  CONSTRAINT CHK_SoLuong_CTHoaDon CHECK (SoLuong>=0)
 );
+
 --====================================================================================================---
 
 CREATE TABLE HoaDon (
@@ -441,12 +483,14 @@ CREATE TABLE HoaDon (
   CONSTRAINT FK_HoaDon_ChiNhanh FOREIGN KEY(IdChiNhanh) REFERENCES ChiNhanh(IdChiNhanh)
 );
 
+
 set dateformat dmy
 INSERT INTO HoaDon VALUES (1,1,'0393123456',N'Momo','21/01/2023');
 INSERT INTO HoaDon VALUES (2,2,'0979541478',N'Momo','20/07/2023');
 SELECT * FROM HoaDon
 
 --====================================================================================================---
+
 
 CREATE TABLE ChiTietHoaDon (
   IdHoaDon BIGINT NOT NULL,
@@ -460,14 +504,9 @@ CREATE TABLE ChiTietHoaDon (
   CONSTRAINT CHK_DonGia_ChiTietHoaDon CHECK(DonGia >= 0)
 );
 
-INSERT INTO ChiTietHoaDon VALUES (3,1,8,8792000);
-INSERT INTO ChiTietHoaDon VALUES (3,2,8,5070000);
-INSERT INTO ChiTietHoaDon VALUES (4,11,2,2598000);
-INSERT INTO ChiTietHoaDon VALUES (4,9,2,998000);
-INSERT INTO ChiTietHoaDon VALUES (4,12,1,699000);
-select *from ChiTietHoaDon
-
 --====================================================================================================---
+
+
 
 CREATE TABLE PhanHoi
 (
@@ -525,15 +564,30 @@ CREATE TABLE DanhGiaSanPham (
   ThoiGianDanhGia DATETIME NOT NULL,
   CONSTRAINT FK_DanhGiaSanPham_SanPham FOREIGN KEY (IdSanPham) REFERENCES SanPham(IdSanPham),
   CONSTRAINT FK_DanhGiaSanPham_KhachHang FOREIGN KEY (IdKhachHang) REFERENCES KhachHang(IdKhachHang),
-  CONSTRAINT CHK_DiemDanhGia CHECK (DiemDanhGia >= 1 AND DiemDanhGia <= 5)
+  CONSTRAINT CHK_DiemDanhGia CHECK (DiemDanhGia BETWEEN 1 AND 5),
+  
 );
+ALTER TABLE DanhGiaSanPham
+ADD CONSTRAINT DF_DiemDanhGia DEFAULT 5 FOR DiemDanhGia;
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 --============================================== Trigger ==========================================---
 GO
-
+---------------------------------------------Vũ Văn Anh-------------------------------------------
 -- Trigger cập nhật số lượng trong bảng kho(nhập kho) khi bảng CTHD kho Nhập thay đổi
-CREATE TRIGGER CapNhatSoLuongNhapKho
+CREATE TRIGGER trig_CapNhatSoLuongNhapKho
 ON ChiTietHoaDonNhapKho
 AFTER INSERT, UPDATE, DELETE
 AS
@@ -555,7 +609,7 @@ END;
 
 -- Trigger cập nhật số lượng trong bảng kho(xuất kho) khi bảng CTHD thay đổi
 GO
-CREATE TRIGGER CapNhatSoLuongXuatKhoHoaDon
+CREATE TRIGGER trig_CapNhatSoLuongXuatKhoHoaDon
 ON ChiTietHoaDon
 AFTER INSERT, UPDATE, DELETE
 AS
@@ -577,7 +631,7 @@ END;
 
 -- Trigger cập nhật số lượng trong bảng kho(xuất kho) khi bảng CT đơn hàng thay đổi. Mua online sẽ lấy hàng ở chi nhánh 1
 GO
-CREATE TRIGGER CapNhatSoLuongXuatKhoDonHang
+CREATE TRIGGER trig_CapNhatSoLuongXuatKhoDonHang
 ON ChiTietDonHang
 AFTER INSERT, UPDATE, DELETE
 AS
@@ -588,23 +642,729 @@ BEGIN
 		INNER JOIN inserted ON K.IdSanPham = inserted.IdSanPham
 		WHERE K.IdChiNhanh = 1 AND K.IdSanPham = inserted.IdSanPham
 	UPDATE Kho
-		SET SoLuongTonKho = K.SoLuongTonKho - deleted.SoLuong
+		SET SoLuongTonKho = K.SoLuongTonKho + deleted.SoLuong
 		FROM Kho K		
 		INNER JOIN deleted ON K.IdSanPham = deleted.IdSanPham
 		WHERE K.IdChiNhanh = 1 AND K.IdSanPham = deleted.IdSanPham
 END;
+
+------------------------------------------Nguyễn Quốc Bảo----------------------------------------
+-- Trigger kiểm tra Nếu số lượng tồn kho không đủ bán: xuất ra thông báo N'Không đủ hàng để bán'
+GO
+CREATE TRIGGER TRG_KtSoLuongTonKho ON ChiTietDonHang
+FOR INSERT
+AS 
+BEGIN
+	IF((SELECT SoLuong FROM inserted WHERE IdSanPham=(SELECT IdSanPham FROM KHO)) <=
+	(SELECT SoLuongTonKho FROM Kho where IdSanPham=(SELECT IdSanPham FROM inserted)))
+	COMMIT TRAN
+	ELSE
+	BEGIN
+	PRINT N'Không đủ hàng để bán'
+	ROLLBACK TRAN
+	END
+END;
+DROP TRIGGER TRG_KtSoLuongTonKho
+--TEST
+--INSERT INTO Kho VALUES(1,1,0)
+--DELETE FROM KHO
+--INSERT INTO ChiTietDonHang VALUES (7,1,2,3380000);
+--SELECT * FROM ChiTietDonHang
+--SELECT* FROM KHO
+--DELETE FROM ChiTietDonHang WHERE IdDonHang=7 AND IdSanPham=1
+
+--Trigger kiểm tra mỗi khi thêm dữ liệu vào bảng HoaDon thì NgayXuatHD là ngày hiện hành
+GO
+CREATE TRIGGER TRG_KtNgayXuatHD ON HoaDon
+FOR INSERT
+AS 
+BEGIN
+	UPDATE HoaDon
+	SET NgayXuatHD=GETDATE()
+	WHERE IdHoaDon=(select IdHoaDon from inserted)
+END;
+
+
+--------------------------------------Hà Tri Thuỷ--------------------------------------------
+-- Trigger kiểm tra mỗi khi thêm dữ liệu vào bảng HoaDonNhapKho thì NgayNhap là ngày hiện hành
+GO
+CREATE TRIGGER TRG_KtNgayNhapKho ON HoaDonNhapKho
+FOR INSERT
+AS 
+BEGIN
+	UPDATE HoaDonNhapKho
+	SET NgayNhap=GETDATE()
+	WHERE IdHoaDonNhapKho=(select IdHoaDonNhapKho from inserted)
+END;
+
+--Trigger kiểm tra mỗi khi thêm dữ liệu vào bảng PhanHoi thì ThoiGianPhanHoi là ngày hiện hành  
+GO
+CREATE TRIGGER TRG_TimePhanHoi ON PhanHoi
+FOR INSERT
+AS 
+BEGIN
+	UPDATE PhanHoi
+	SET ThoiGianPhanHoi=GETDATE()
+	WHERE IdPhanHoi=(select IdPhanHoi from inserted)
+END;
+
+--TEST
+--INSERT INTO PhanHoi VALUES (41,'0123456789',N'Giao hàng',N'Giao hàng không đúng hẹn','18:40:28 5/8/2023');
+--select * from PhanHoi where IdKhachHang=41
+--delete from PhanHoi where IdKhachHang=41
+
+
+
+
+
+
+
+
+--=============================================PHÂN QUYỀN==========================================---
+GO
+
+-- role khách hàng
+sp_addrole 'RoleKhachHang'
+GRANT SELECT ON SanPham TO RoleKhachHang
+GO
+GRANT SELECT ON LoaiSanPham TO RoleKhachHang
+GO
+GRANT SELECT ON LoaiSanPhamCHa TO RoleKhachHang
+GO
+
+-- role Nhân viên
+sp_addrole 'RoleNhanVien'
+GRANT SELECT ON SanPham TO RoleNhanVien
+GO
+GRANT SELECT ON LoaiSanPham TO RoleNhanVien
+GO
+GRANT SELECT ON LoaiSanPhamCHa TO RoleNhanVien
+GO
+GRANT SELECT ON ChiNhanh TO RoleNhanVien
+GO
+GRANT SELECT ON NhanVien TO RoleNhanVien
+GO
+GRANT INSERT ON HoaDon TO RoleNhanVien
+GO
+GRANT INSERT ON ChiTietHoaDon TO RoleNhanVien
+GO
+GRANT SELECT ON HoaDonNhapKho TO RoleNhanVien
+GO
+GRANT SELECT ON ChiTietHoaDonNhapKho TO RoleNhanVien
+GO
+GRANT SELECT ON Kho TO RoleNhanVien
+GO
+GRANT SELECT, EXECUTE ON SCHEMA::dbo TO RoleNhanVien
+
+
+--role Quản lý
+GO
+sp_addrole 'RoleQuanLy'
+GO
+GRANT SELECT,INSERT, UPDATE, DELETE,EXECUTE TO RoleQuanLy;
+GO
+GRANT SELECT, EXECUTE ON SCHEMA::dbo TO RoleQuanLy
+GO
+
+----------------- add admin
+Use master
+GO
+sp_addlogin 'admin','admin@123'
+Go
+Use FashionShopManagement
+GO
+sp_adduser 'admin','admin' 
+GO
+sp_addrolemember 'db_owner','admin'
+GO
+
+--------------- add nhân viên 
+
+Use master
+GO
+sp_addlogin 'nhanvien1','123456'
+Go
+Use FashionShopManagement
+GO
+sp_adduser 'nhanvien1','nhanvien1' 
+GO
+sp_addrolemember 'RoleNhanVien','nhanvien1'
+GO
+Use master
+GO
+sp_addlogin 'nhanvienkho1','123456'
+Go
+Use FashionShopManagement
+GO
+sp_adduser 'nhanvienkho1','nhanvienkho1' 
+GO
+sp_addrolemember 'RoleNhanVien','nhanvienkho1'
+GO
+Use master
+GO
+sp_addlogin 'nhanvienkho2','123456'
+Go
+Use FashionShopManagement
+GO
+sp_adduser 'nhanvienkho2','nhanvienkho2' 
+GO
+sp_addrolemember 'RoleNhanVien','nhanvienkho2'
+
+-----------------add quản lý
+Use master
+GO
+sp_addlogin 'quanly1' ,'123456'
+GO
+Use FashionShopManagement
+GO
+sp_adduser 'quanly1','quanly1'
+GO
+sp_addrolemember 'RoleQuanLy','quanly1'
+GO
+sp_addlogin 'quanly2' ,'123456'
+GO
+sp_adduser 'quanly2','quanly2'
+GO
+sp_addrolemember 'RoleQuanLy','quanly2'
+----------------add khách hàng
+Use master
+GO
+sp_addlogin 'customer1' ,'123456'
+GO
+Use FashionShopManagement
+GO
+sp_adduser 'customer1','customer1'
+GO
+sp_addrolemember 'RoleKhachHang','customer1'
+Use master
+GO
+sp_addlogin 'customer2' ,'123456'
+GO
+Use FashionShopManagement
+GO
+sp_adduser 'customer2','customer2'
+GO
+sp_addrolemember 'RoleKhachHang','customer2'
+
+
+
 --============================================== Stored Procedures ==========================================---
+---------------------------------------------Vũ Văn Anh-------------------------------------------
+
+-- Thêm sản phẩm
+GO
+CREATE PROCEDURE sp_ThemSanPham
+    @TenSanPham NVARCHAR(255),
+    @IdLoaiSP INT,
+    @AnhSP VARCHAR(255),
+    @AnhSPChiTiet1 VARCHAR(255),
+    @AnhSPChiTiet2 VARCHAR(255),
+    @GiaBan BIGINT,
+    @GiamGia INT,
+    @SoLuongDanhGia INT,
+    @NoiDungSanPham NVARCHAR(MAX),
+    @DanhGiaSanPham NVARCHAR(MAX),
+    @ThanhToanVanChuyen NVARCHAR(MAX),
+    @TonTai BIT
+AS
+BEGIN
+    INSERT INTO SanPham (TenSanPham, IdLoaiSP, AnhSP, AnhSPChiTiet1, AnhSPChiTiet2, GiaBan, GiamGia, SoLuongDanhGia, NoiDungSanPham, DanhGiaSanPham, ThanhToanVanChuyen, TonTai)
+    VALUES (@TenSanPham, @IdLoaiSP, @AnhSP, @AnhSPChiTiet1, @AnhSPChiTiet2, @GiaBan, @GiamGia, @SoLuongDanhGia, @NoiDungSanPham, @DanhGiaSanPham, @ThanhToanVanChuyen, @TonTai);
+END;
+
+
+-- Xóa sản phẩm
+GO
+CREATE PROCEDURE sp_XoaSanPham
+    @IdSanPham BIGINT
+AS
+BEGIN
+    DELETE FROM SanPham WHERE IdSanPham = @IdSanPham;
+END;
+
+
+-- Sửa sản phẩm 
+GO
+CREATE PROCEDURE sp_SuaSanPham
+    @IdSanPham BIGINT,
+    @TenSanPham NVARCHAR(255),
+    @IdLoaiSP INT,
+    @AnhSP VARCHAR(255),
+    @AnhSPChiTiet1 VARCHAR(255),
+    @AnhSPChiTiet2 VARCHAR(255),
+    @GiaBan BIGINT,
+    @GiamGia INT,
+    @SoLuongDanhGia INT,
+    @NoiDungSanPham NVARCHAR(MAX),
+    @DanhGiaSanPham NVARCHAR(MAX),
+    @ThanhToanVanChuyen NVARCHAR(MAX),
+    @TonTai BIT
+AS
+BEGIN
+    UPDATE SanPham
+    SET
+        TenSanPham = @TenSanPham,
+        IdLoaiSP = @IdLoaiSP,
+        AnhSP = @AnhSP,
+        AnhSPChiTiet1 = @AnhSPChiTiet1,
+        AnhSPChiTiet2 = @AnhSPChiTiet2,
+        GiaBan = @GiaBan,
+        GiamGia = @GiamGia,
+        SoLuongDanhGia = @SoLuongDanhGia,
+        NoiDungSanPham = @NoiDungSanPham,
+        DanhGiaSanPham = @DanhGiaSanPham,
+        ThanhToanVanChuyen = @ThanhToanVanChuyen,
+        TonTai = @TonTai
+    WHERE IdSanPham = @IdSanPham;
+END;
+
+
+-- Thêm hoá đơn nhập kho
+GO
+CREATE PROCEDURE sp_ThemHoaDonNhapKho
+    @IdNhanVien BIGINT,
+    @IdChiNhanh INT
+AS
+BEGIN
+    INSERT INTO HoaDonNhapKho (NgayNhap, IdNhanVien, IdChiNhanh)
+    VALUES (GETDATE(), @IdNhanVien, @IdChiNhanh);
+END;
+
+-- Sửa hoá đơn nhập kho
+GO
+CREATE PROCEDURE sp_SuaHoaDonNhapKho
+    @IdHoaDonNhapKho BIGINT,
+    @NgayNhap DATETIME,
+    @IdNhanVien BIGINT,
+    @IdChiNhanh INT
+AS
+BEGIN
+    UPDATE HoaDonNhapKho
+    SET NgayNhap = @NgayNhap,
+        IdNhanVien = @IdNhanVien,
+        IdChiNhanh = @IdChiNhanh
+    WHERE IdHoaDonNhapKho = @IdHoaDonNhapKho;
+END;
+
+-- Xoá hoá đơn nhập kho
+GO
+CREATE PROCEDURE sp_XoaHoaDonNhapKho
+    @IdHoaDonNhapKho BIGINT
+AS
+BEGIN
+    DELETE FROM HoaDonNhapKho
+    WHERE IdHoaDonNhapKho = @IdHoaDonNhapKho;
+END;
+
+-- Thêm chi tiết hoá đơn nhập kho
+GO
+CREATE PROCEDURE sp_ThemChiTietHoaDonNhapKho
+    @IdHoaDonNhapKho BIGINT,
+    @IdSanPham BIGINT,
+    @SoLuong INT
+AS
+BEGIN
+    INSERT INTO ChiTietHoaDonNhapKho (IdHoaDonNhapKho, IdSanPham, SoLuong)
+    VALUES (@IdHoaDonNhapKho, @IdSanPham, @SoLuong);
+END;
+
+-- Sửa chi tiết hoá đơn nhập kho
+GO
+CREATE PROCEDURE sp_SuaChiTietHoaDonNhapKho
+    @IdHoaDonNhapKho BIGINT,
+    @IdSanPham BIGINT,
+    @SoLuong INT
+AS
+BEGIN
+    UPDATE ChiTietHoaDonNhapKho
+    SET SoLuong = @SoLuong
+    WHERE IdHoaDonNhapKho = @IdHoaDonNhapKho AND IdSanPham = @IdSanPham;
+END;
+
+-- Xoá 1 chi tiết hoá đơn nhập kho
+GO
+CREATE PROCEDURE sp_Xoa1ChiTietHoaDonNhapKho
+    @IdHoaDonNhapKho BIGINT,
+    @IdSanPham BIGINT
+AS
+BEGIN
+    DELETE FROM ChiTietHoaDonNhapKho
+    WHERE IdHoaDonNhapKho = @IdHoaDonNhapKho AND IdSanPham = @IdSanPham;
+END;
+
+-- Xoá hêt chi tiết hoá đơn nhập kho của 1 hoá đơn
+GO
+CREATE PROCEDURE sp_XoaChiTietHoaDonNhapKho
+    @IdHoaDonNhapKho BIGINT
+AS
+BEGIN
+    DELETE FROM ChiTietHoaDonNhapKho
+    WHERE IdHoaDonNhapKho = @IdHoaDonNhapKho
+END;
+
+-- Thêm đơn hàng
+GO
+CREATE PROCEDURE sp_ThemDonHang
+    @IdKhachHang BIGINT,
+    @SoDienThoai VARCHAR(10),
+    @DiaChiGiaoHang NVARCHAR(255),
+    @PhuongThucThanhToan NVARCHAR(30),
+    @ThoiGianDatHang DATETIME,
+    @ThoiGianGiaoHangDuKien DATETIME,
+    @TrangThaiDonHang NVARCHAR(30),
+    @TrangThaiThanhToan NVARCHAR(30)
+AS
+BEGIN
+    INSERT INTO DonHang (IdKhachHang, SoDienThoai, DiaChiGiaoHang, PhuongThucThanhToan, ThoiGianDatHang, ThoiGianGiaoHangDuKien, TrangThaiDonHang, TrangThaiThanhToan)
+    VALUES (@IdKhachHang, @SoDienThoai, @DiaChiGiaoHang, @PhuongThucThanhToan, @ThoiGianDatHang, @ThoiGianGiaoHangDuKien, @TrangThaiDonHang, @TrangThaiThanhToan);
+END;
+
+-- Xóa sản phẩm
+CREATE PROCEDURE sp_XoaSanPham
+    @IdSanPham BIGINT
+AS
+BEGIN
+    DELETE FROM SanPham WHERE IdSanPham = @IdSanPham;
+END;
+
+
+-- Sửa sản phẩm 
+GO
+CREATE PROCEDURE sp_SuaSanPham
+    @IdSanPham BIGINT,
+    @TenSanPham NVARCHAR(255),
+    @IdLoaiSP INT,
+    @AnhSP VARCHAR(255),
+    @AnhSPChiTiet1 VARCHAR(255),
+    @AnhSPChiTiet2 VARCHAR(255),
+    @GiaBan BIGINT,
+    @GiamGia INT,
+    @SoLuongDanhGia INT,
+    @NoiDungSanPham NVARCHAR(MAX),
+    @DanhGiaSanPham NVARCHAR(MAX),
+    @ThanhToanVanChuyen NVARCHAR(MAX),
+    @TonTai BIT
+AS
+BEGIN
+    UPDATE SanPham
+    SET
+        TenSanPham = @TenSanPham,
+        IdLoaiSP = @IdLoaiSP,
+        AnhSP = @AnhSP,
+        AnhSPChiTiet1 = @AnhSPChiTiet1,
+        AnhSPChiTiet2 = @AnhSPChiTiet2,
+        GiaBan = @GiaBan,
+        GiamGia = @GiamGia,
+        SoLuongDanhGia = @SoLuongDanhGia,
+        NoiDungSanPham = @NoiDungSanPham,
+        DanhGiaSanPham = @DanhGiaSanPham,
+        ThanhToanVanChuyen = @ThanhToanVanChuyen,
+        TonTai = @TonTai
+    WHERE IdSanPham = @IdSanPham;
+
+END;
+----------===========================================Hà Tri Thuỷ=============================================---
+
+GO
+CREATE PROCEDURE ThemTaiKhoanKH(
+    @TenTaiKhoan VARCHAR(255),
+    @MatKhau VARCHAR(255))
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Thêm người dùng vào bảng NguoiDung
+    INSERT INTO NguoiDung (TenTaiKhoan, MatKhau, IdVaiTro, TonTai, Cam)
+    VALUES (@TenTaiKhoan, @MatKhau, 4, 1, 0);
+
+    -- Tạo tài khoản người dùng
+    EXEC sp_addlogin @TenTaiKhoan, @MatKhau;
+
+    -- Thêm người dùng vào cơ sở dữ liệu
+    EXEC sp_adduser @TenTaiKhoan, @TenTaiKhoan;
+
+	EXEC sp_addrolemember 'RoleKhachHang',@TenTaiKhoan
+END;
+--GO
+--exec ThemTaiKhoanKH 'test','123'
+
+GO
+CREATE PROCEDURE XoaTaiKhoanKH
+	
+    @TenTaiKhoan VARCHAR(255)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    -- Xóa người dùng từ bảng NguoiDung
+    DELETE FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan;
+
+    -- Xóa tài khoản người dùng và login
+    IF EXISTS (SELECT * FROM sys.server_principals WHERE name = @TenTaiKhoan)
+    BEGIN
+        EXEC sp_dropuser @TenTaiKhoan;
+        EXEC sp_droplogin @TenTaiKhoan;
+		EXEC sp_droprolemember 'RoleKhachHang',@TenTaiKhoan
+    END;
+END;
+--go
+--exec XoaTaiKhoanKH 'test'
+GO
+CREATE PROCEDURE proc_TimLichSuGiaoDich
+    @SoDienThoai NVARCHAR(20)
+AS
+BEGIN
+    SELECT 
+        IdHoaDon,
+        NgayXuatHD,
+        dbo.func_TongTienHoaDon(IdHoaDon) AS TongTien
+    FROM HoaDon 
+    WHERE SoDienThoai = @SoDienThoai;
+END;
+GO
+--exec proc_TimLichSuGiaoDich '0393123456'
+GO
+CREATE PROCEDURE XoaTaiKhoanNV
+    @TenTaiKhoan VARCHAR(255),@IdVaiTro int
+AS
+BEGIN
+    SET NOCOUNT ON;
+    -- Xóa người dùng từ bảng NguoiDung
+    DELETE FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan;
+
+    -- Xóa tài khoản người dùng và login
+    IF EXISTS (SELECT * FROM sys.server_principals WHERE name = @TenTaiKhoan)
+    BEGIN
+        EXEC sp_dropuser @TenTaiKhoan;
+        EXEC sp_droplogin @TenTaiKhoan;
+		IF(@IdVaiTro=2)
+		EXEC sp_droprolemember 'RoleQuanLy',@TenTaiKhoan
+		else IF(@IdVaiTro=3)
+		EXEC sp_droprolemember 'RoleNhanVien',@TenTaiKhoan
+    END;
+END;
+
+
+--=================================Nguyễn Quốc Bảo==================================================---
+GO
+CREATE PROCEDURE ThemNguoiDungNhanVien
+    @TenTaiKhoan VARCHAR(255),
+    @MatKhau VARCHAR(255),
+	@IdVaiTro INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Kiểm tra tính hợp lệ của dữ liệu đầu vào
+    IF @TenTaiKhoan IS NOT NULL AND @MatKhau IS NOT NULL
+    BEGIN
+        BEGIN TRY
+            -- Kiểm tra xem Tên tài khoản đã tồn tại hay chưa
+            IF NOT EXISTS (SELECT 1 FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan)
+            BEGIN
+                -- Thiết lập các trạng thái mặc định
+                INSERT INTO NguoiDung (TenTaiKhoan, MatKhau, IdVaiTro, TonTai, Cam)
+                VALUES (@TenTaiKhoan, @MatKhau, @IdVaiTro, 1, 0);
+
+                -- Thêm login và user
+                EXEC sp_addlogin @TenTaiKhoan, @MatKhau;
+                EXEC sp_adduser @TenTaiKhoan, @TenTaiKhoan;
+
+                -- Thêm vào vai trò tương ứng
+                IF @IdVaiTro = 2
+                    EXEC sp_addrolemember 'RoleQuanLy', @TenTaiKhoan;
+                ELSE IF @IdVaiTro = 3
+                    EXEC sp_addrolemember 'RoleNhanVien', @TenTaiKhoan;
+
+                PRINT N'Tài khoản nhân viên đã được thêm thành công.';
+            END
+            ELSE
+            BEGIN
+                PRINT N'Tên tài khoản đã tồn tại. Vui lòng chọn một tên khác.';
+            END
+        END TRY
+        BEGIN CATCH
+            -- Xử lý lỗi nếu có
+            PRINT 'Lỗi thêm tài khoản nhân viên.';
+            -- Thêm mã xử lý lỗi khác nếu cần
+        END CATCH;
+    END
+    ELSE
+    BEGIN
+        PRINT N'Dữ liệu đầu vào không hợp lệ.';
+    END;
+END;
 
 
 
+--EXEC ThemNguoiDungNhanVien 
+--    @TenTaiKhoan = 'BaoBell3', 
+--    @MatKhau = '123456',@IdVaiTro=2 ;
 
+--SELECT * FROM NguoiDung;
+Create PROCEDURE XoaTaiKhoanNV
+    @TenTaiKhoan NVARCHAR(255),
+    @IdVaiTro INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Kiểm tra xem người dùng có tồn tại không
+    IF EXISTS (SELECT * FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan)
+    BEGIN
+        BEGIN TRY
+            -- Xóa người dùng từ bảng NguoiDung
+            DELETE FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan;
+
+            -- Kiểm tra xem vai trò có tồn tại không và xóa vai trò nếu cần
+            IF @IdVaiTro = 2 AND EXISTS (SELECT * FROM sys.database_principals WHERE name = 'RoleQuanLy')
+                EXEC sp_droprolemember 'RoleQuanLy', @TenTaiKhoan;
+            ELSE IF @IdVaiTro = 3 AND EXISTS (SELECT * FROM sys.database_principals WHERE name = 'RoleNhanVien')
+                EXEC sp_droprolemember 'RoleNhanVien', @TenTaiKhoan;
+
+            -- Xóa tài khoản người dùng và login
+            IF EXISTS (SELECT * FROM sys.server_principals WHERE name = @TenTaiKhoan)
+            BEGIN
+                EXEC sp_dropuser @TenTaiKhoan;
+                EXEC sp_droplogin @TenTaiKhoan;
+            END;
+        END TRY
+        BEGIN CATCH
+            -- Xử lý lỗi nếu có
+            PRINT 'Lỗi xóa tài khoản.';
+            -- Thêm mã xử lý lỗi khác nếu cần
+        END CATCH;
+    END
+    ELSE
+    BEGIN
+        PRINT 'Người dùng không tồn tại.';
+    END;
+END;
+
+--exec XoaTaiKhoanNV 'BaoBell3','2'
+GO
+CREATE PROCEDURE LayThongTinNhanVien
+    @TenTaiKhoan VARCHAR(255)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Kiểm tra xem Tên tài khoản và Vai tro có tồn tại hay không
+    IF EXISTS (SELECT 1 FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan AND IdVaiTro = 3)
+    BEGIN
+        -- Lấy thông tin nhân viên
+        SELECT * FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan AND IdVaiTro = 3;
+    END
+    ELSE
+    BEGIN
+        PRINT 'Tên tài khoản không tồn tại hoặc không phải là nhân viên.';
+    END
+END;
+
+-- Gọi stored procedure để lấy thông tin nhân viên với tên tài khoản cụ thể
+--EXEC LayThongTinNhanVien @TenTaiKhoan = 'nhanvien1';
+--EXEC LayThongTinNhanVien @TenTaiKhoan = 'BaoBell3';
+CREATE PROCEDURE dbo.SuaThongTinNhanVien
+(
+    @IdNguoiDung BIGINT,
+    @TenTaiKhoan NVARCHAR(255),
+    @MatKhau NVARCHAR(255),
+    @IdVaiTro INT,
+    @TonTai BIT,
+    @Cam BIT,
+    @TenNhanVien NVARCHAR(255),
+    @NgaySinh DATE,
+    @GioiTinh NCHAR(5),
+    @DiaChi NVARCHAR(255),
+    @SoDienThoai CHAR(10),
+    @Email VARCHAR(100)
+)
+AS
+BEGIN
+    DECLARE @IsSuccessful BIT = 0;
+
+    -- Kiểm tra xem người dùng có tồn tại hay không
+    IF NOT EXISTS (SELECT 1 FROM NguoiDung WHERE IdNguoiDung = @IdNguoiDung)
+    BEGIN
+        PRINT 'Lỗi: Người dùng không tồn tại.';
+        RETURN;
+    END
+
+    -- Kiểm tra xem có người dùng khác đã sử dụng tên tài khoản mới hay không
+    IF EXISTS (SELECT 1 FROM NguoiDung WHERE TenTaiKhoan = @TenTaiKhoan AND IdNguoiDung != @IdNguoiDung)
+    BEGIN
+        PRINT 'Lỗi: Tên tài khoản đã được sử dụng bởi người dùng khác.';
+        RETURN;
+    END
+
+    BEGIN TRY
+        -- Bắt đầu giao dịch
+        BEGIN TRANSACTION;
+
+        -- Cập nhật thông tin người dùng
+        UPDATE NguoiDung
+        SET TenTaiKhoan = @TenTaiKhoan,
+            MatKhau = @MatKhau,
+            IdVaiTro = @IdVaiTro,
+            TonTai = @TonTai,
+            Cam = @Cam
+        WHERE IdNguoiDung = @IdNguoiDung;
+
+        -- Cập nhật thông tin nhân viên
+        UPDATE NhanVien
+        SET TenNhanVien = @TenNhanVien,
+            NgaySinh = @NgaySinh,
+            GioiTinh = @GioiTinh,
+            DiaChi = @DiaChi,
+            SoDienThoai = @SoDienThoai,
+            Email = @Email
+        WHERE IdNguoiDung = @IdNguoiDung;
+
+        -- Commit giao dịch nếu không có lỗi
+        COMMIT;
+        SET @IsSuccessful = 1;
+    END TRY
+    BEGIN CATCH
+        -- Rollback giao dịch nếu có lỗi
+        ROLLBACK;
+        PRINT 'Lỗi: ' + ERROR_MESSAGE();
+        RETURN; -- Return to prevent further execution
+    END CATCH
+
+    -- In thông báo thành công hoặc thất bại
+    IF @IsSuccessful = 1
+        PRINT 'Cập nhật thông tin nhân viên thành công.';
+    ELSE
+        PRINT 'Cập nhật thông tin nhân viên thất bại.';
+END;
+GO
+
+--drop PROCEDURE dbo.SuaThongTinNhanVien
+
+--DECLARE @IdNguoiDungTest BIGINT = 76; --Chọn Id cần sửa 
+--DECLARE @TenTaiKhoanTest VARCHAR(255) = 'baobel';
+--DECLARE @MatKhauTest VARCHAR(255) = '123';
+--DECLARE @IdVaiTroTest INT = 2;
+--DECLARE @TonTaiTest BIT = 1;
+--DECLARE @CamTest BIT = 0;
+
+-- Gọi stored procedure
+--EXEC dbo.SuaThongTinNhanVien 
+--    @IdNguoiDung = @IdNguoiDungTest,
+--    @TenTaiKhoan = @TenTaiKhoanTest,
+--    @MatKhau = @MatKhauTest,
+--    @IdVaiTro = @IdVaiTroTest,
+--    @TonTai = @TonTaiTest,
+--    @Cam = @CamTest;
+
+--	select * from NguoiDung
 
 
 
 --============================================== Function ==========================================---
+---------------------------------------------Vũ Văn Anh-------------------------------------------
 GO
 
-CREATE FUNCTION TongTienHoaDon(@IdHoaDon BIGINT)
+CREATE FUNCTION func_TongTienHoaDon(@IdHoaDon BIGINT)
 RETURNS BIGINT
 AS
 BEGIN
@@ -617,15 +1377,13 @@ BEGIN
     RETURN ISNULL(@Tong, 0);
 END;
 
-/* DECLARE @@IdHoaDon BIGINT = 1;
-SELECT dbo.TongTienHoaDon(@@IdHoaDon) AS TongTien; */
---DECLARE @TONG INT
---SET @TONG=DBO.TongTienHoaDon()
---SELECT @TONG
---
+/* DECLARE @IdHoaDon BIGINT = 1;
+SELECT dbo.func_TongTienHoaDon(@IdHoaDon) AS TongTien; */
+
+
 GO
 
-CREATE FUNCTION TongTienDonHang(@IdDonhang BIGINT)
+CREATE FUNCTION func_TongTienDonHang(@IdDonhang BIGINT)
 RETURNS BIGINT
 AS
 BEGIN
@@ -638,11 +1396,11 @@ BEGIN
 END;
 
 /* DECLARE @IdDonhang BIGINT = 5;
-SELECT dbo.TongTienDonHang(@IdDonhang) AS TongTien; */
+SELECT dbo.func_TongTienDonHang(@IdDonhang) AS TongTien; */
 
 GO
 
-CREATE FUNCTION TongTienDonHangCuaKhach(@IdKhachHang BIGINT,@Thang int,@Nam int)
+CREATE FUNCTION func_TongTienDonHangCuaKhach(@IdKhachHang BIGINT,@Thang int,@Nam int)
 RETURNS BIGINT
 AS
 BEGIN
@@ -658,11 +1416,11 @@ BEGIN
 END;
 
 /*	DECLARE @IdDonhang BIGINT = 6 ;
-SELECT dbo.TongTienDonHangCuaKhach(@IdDonhang, 10, 2023) AS TongTien;	*/
+SELECT dbo.func_TongTienDonHangCuaKhach(@IdDonhang, 10, 2023) AS TongTien;	*/
 
 
 GO
-CREATE FUNCTION TinhDoanhThuChiNhanh(@IdChiNhanh int, @Ngay int, @Thang int,@Nam int)
+CREATE FUNCTION func_TinhDoanhThuChiNhanh(@IdChiNhanh int, @Ngay int, @Thang int,@Nam int)
 RETURNS BIGINT
 AS
 BEGIN
@@ -675,4 +1433,218 @@ BEGIN
 END;
 
 /*	DECLARE @IdChiNhanh BIGINT = 1 ;
-SELECT dbo.TinhDoanhThuChiNhanh(@IdChiNhanh,1 , 10, 2023) AS TongTien;	*/
+SELECT dbo.func_TinhDoanhThuChiNhanh(@IdChiNhanh,1 , 10, 2023) AS TongTien;	*/
+
+GO
+CREATE FUNCTION func_GiaSanPham(@IdSanPham bigint)
+RETURNS BIGINT
+AS
+BEGIN
+	DECLARE @Gia BIGINT;
+    SELECT @Gia = GiaBan - GiaBan * GiamGia /100
+	FROM SanPham WHERE IdSanPham = @IdSanPham
+    RETURN ISNULL(@Gia, 0);
+END;
+
+/*	DECLARE @IdSanPham BIGINT = 2 ;
+SELECT dbo.func_GiaSanPham(@IdSanPham) AS Gia;	*/
+
+
+GO
+CREATE FUNCTION func_DsHoaDonNhapKho()
+RETURNS TABLE
+RETURN
+(
+	SELECT IdHoaDonNhapKho, NgayNhap,TenNhanVien,TenChiNhanh FROM HoaDonNhapKho HD
+	INNER JOIN NhanVien NV ON HD.IdNhanVien = NV.IdNhanVien
+	INNER JOIN ChiNhanh CN ON CN.IdChiNhanh = HD.IdChiNhanh
+);
+GO
+CREATE FUNCTION func_DsCtHdNhapTheoIdHd(@IdHoaDonNhapKho bigint)
+RETURNS TABLE
+RETURN
+(
+	select IdHoaDonNhapKho, TenSanPham, SoLuong 
+	from ChiTietHoaDonNhapKho CT 
+	INNER JOIN SanPham SP ON CT.IdSanPham = SP.IdSanPham 
+	WHERE IdHoaDonNhapKho = @IdHoaDonNhapKho
+);
+go
+CREATE FUNCTION func_DemSLSanPhamCha(@IdLoaiSPCha int, @date varchar(20))
+RETURNS INT
+AS
+BEGIN
+	DECLARE @SoLuong int
+
+	SELECT @SoLuong = SUM(CT.SoLuong)
+	FROM ChiTietHoaDon CT
+	INNER JOIN HoaDon HD ON CT.IdHoaDon = HD.IdHoaDon
+	INNER JOIN SanPham SP ON CT.IdSanPham = SP.IdSanPham
+	INNER JOIN LoaiSanPham LSP ON LSP.IdLoaiSP = SP.IdLoaiSP
+	INNER JOIN LoaiSanPhamCha LSPC ON LSP.IdLoaiSPCha = LSPC.IdLoaiSPCha
+	WHERE CONVERT(DATE, NgayXuatHD) = @date AND LSPC.IdLoaiSPCha = @IdLoaiSPCha
+	RETURN ISNULL(@SoLuong, 0);
+END
+go
+----------===========================================Hà Tri Thuỷ=============================================---
+GO
+CREATE FUNCTION func_DsSanPhamKhoTheoChiNhanh(@IdChiNhanh int)
+returns table
+return
+(
+	select SP.IdSanPham,SP.TenSanPham,K.SoLuongTonKho
+	from Kho K
+	INNER JOIN SanPham SP ON K.IdSanPham = SP.IdSanPham 
+	WHERE IdChiNhanh=@IdChiNhanh
+);
+GO
+CREATE FUNCTION func_FindSanPhamTheoChiNhanh(
+    @IdChiNhanh INT,
+    @tensp NVARCHAR(255))
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT SP.IdSanPham,SP.TenSanPham, K.SoLuongTonKho
+    FROM Kho K
+    INNER JOIN SanPham SP ON K.IdSanPham = SP.IdSanPham 
+    WHERE SP.TenSanPham LIKE N'%' + @tensp + '%'
+        AND K.IdChiNhanh = @IdChiNhanh
+);
+GO
+
+--SELECT * FROM dbo.func_FindSanPhamTheoChiNhanh(1,N'ĐẦM')
+CREATE FUNCTION func_TimLichSuGiaoDich
+(
+    @SoDienThoai CHAR(10)
+)
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT 
+        IdHoaDon,
+        NgayXuatHD,
+        dbo.func_TongTienHoaDon(IdHoaDon) AS TongTien
+    FROM HoaDon 
+    WHERE SoDienThoai = @SoDienThoai
+);
+GO
+--SELECT * from dbo.func_TimLichSuGiaoDich ('0393123456')
+
+CREATE FUNCTION func_TinhDoanhSo(@IdLoaiSPCha int, @date varchar(20))
+RETURNS INT
+AS
+BEGIN
+	DECLARE @Tong MONEY;
+    SELECT @Tong = SUM(SoLuong * DonGia)
+	FROM ChiTietHoaDon CT
+	INNER JOIN HoaDon HD ON CT.IdHoaDon = HD.IdHoaDon
+	INNER JOIN SanPham SP ON CT.IdSanPham = SP.IdSanPham
+	INNER JOIN LoaiSanPham LSP ON LSP.IdLoaiSP = SP.IdLoaiSP
+	INNER JOIN LoaiSanPhamCha LSPC ON LSP.IdLoaiSPCha = LSPC.IdLoaiSPCha
+	WHERE CONVERT(DATE, NgayXuatHD) = @date AND LSPC.IdLoaiSPCha = @IdLoaiSPCha
+	RETURN ISNULL(@Tong, 0);
+END
+--SELECT DBO.func_TinhDoanhSo(1,'2023/12/04')
+go
+create function func_FindTaiKhoanNV(@TenTaiKhoan varchar(255))
+returns table
+as
+	return(select IdNguoiDung,TenTaiKhoan,MatKhau,TenVaiTro,TonTai,Cam 
+	from NguoiDung ND
+	inner join VaiTro on VaiTro.IdVaiTro=ND.IdVaiTro
+	where (ND.IdVaiTro!=4 and ND.IdVaiTro!=1)and ND.TenTaiKhoan=@TenTaiKhoan) 
+GO
+--select *from dbo.func_FindTaiKhoanNV('quanly1')
+
+--=================================Nguyễn Quốc Bảo=================================---
+go
+create function func_ShowTaiKhoanNV()
+returns table
+as
+	return(select IdNguoiDung,TenTaiKhoan,MatKhau,TenVaiTro,TonTai,Cam 
+	from NguoiDung ND
+	inner join VaiTro on VaiTro.IdVaiTro=ND.IdVaiTro
+	where (ND.IdVaiTro!=4 and ND.IdVaiTro!=1))
+GO
+--select *from dbo.func_ShowTaiKhoanNV()
+go
+
+CREATE FUNCTION func_TinhTuoiNhanVien
+(
+    @IdNhanVien BIGINT
+)
+RETURNS INT
+AS
+BEGIN
+    DECLARE @Tuoi INT;
+
+    -- Kiểm tra xem IdNhanVien có thuộc VaiTro là 3 (Nhân viên) hay không
+    IF EXISTS (SELECT 1 FROM NhanVien NV INNER JOIN NguoiDung ND ON NV.IdNguoiDung = ND.IdNguoiDung
+               WHERE NV.IdNhanVien = @IdNhanVien AND ND.IdVaiTro = 3)
+    BEGIN
+        -- Lấy ngày sinh của nhân viên
+        SELECT @Tuoi = DATEDIFF(YEAR, NV.NgaySinh, GETDATE()) - 
+                       CASE WHEN DATEADD(YEAR, DATEDIFF(YEAR, NV.NgaySinh, GETDATE()), NV.NgaySinh) > GETDATE()
+                            THEN 1
+                            ELSE 0
+                       END
+        FROM NhanVien NV
+        INNER JOIN NguoiDung ND ON NV.IdNguoiDung = ND.IdNguoiDung
+        WHERE NV.IdNhanVien = @IdNhanVien;
+    END
+    ELSE
+    BEGIN
+        -- Trường hợp IdNhanVien không thuộc VaiTro là 3
+        SET @Tuoi = -1; -- Hoặc giá trị nào đó để biểu thị rằng không phải nhân viên
+    END
+
+    RETURN @Tuoi;
+END;
+GO
+--drop FUNCTION dbo.TinhTuoiNhanVienById
+
+--DECLARE @IdNhanVien BIGINT = 6;
+--DECLARE @TuoiNhanVien INT;
+
+--SET @TuoiNhanVien = dbo.func_TinhTuoiNhanVien(@IdNhanVien);
+
+--IF @TuoiNhanVien >= 0
+--    PRINT N'Tuổi của nhân viên là ' + CAST(@TuoiNhanVien AS NVARCHAR(10));
+--ELSE
+--    PRINT N'IdNhanVien không thuộc VaiTro là 3 (Nhân viên)';
+
+--================================= FUNCTION2=======================
+GO
+CREATE FUNCTION func_LayTenDayDuNhanVien
+(
+    @IdNhanVien BIGINT
+)
+RETURNS NVARCHAR(255)
+AS
+BEGIN
+    DECLARE @TenDayDu NVARCHAR(255);
+
+    -- Lấy tên đầy đủ của nhân viên
+    SELECT @TenDayDu = NV.TenNhanVien
+    FROM NhanVien NV
+    INNER JOIN NguoiDung ND ON NV.IdNguoiDung = ND.IdNguoiDung
+    WHERE NV.IdNhanVien = @IdNhanVien;
+
+    RETURN @TenDayDu;
+END;
+GO
+
+--DECLARE @IdNhanVienTest BIGINT = 5;
+--DECLARE @TenDayDu NVARCHAR(255);
+
+--SET @TenDayDu = dbo.func_LayTenDayDuNhanVien(@IdNhanVienTest);
+
+--IF @TenDayDu IS NOT NULL
+--PRINT N'Tên đầy đủ của nhân viên là ' + @TenDayDu;
+--ELSE
+--PRINT N'Không tìm thấy thông tin cho IdNhanVien ' + CAST(@IdNhanVienTest AS NVARCHAR(10));
+
+
+

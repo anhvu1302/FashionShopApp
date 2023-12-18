@@ -14,7 +14,8 @@ namespace FashionShopApp.GUI
 {
     public partial class frmSanPham : Form
     {
-        SQLConfig config = new SQLConfig();
+        
+        SQLConfig config = new SQLConfig(NguoiDungHienTai.CurentUser.nguoiDung.TenTaiKhoan, NguoiDungHienTai.CurentUser.nguoiDung.MatKhau);
         string sql;
         public frmSanPham()
         {
@@ -27,7 +28,6 @@ namespace FashionShopApp.GUI
             LoadListSanPham();
             LoadCboLoaiSanPham();
             LoadCboTonTai();
-            loadSanPhamDGV();
         }
         public void LoadCboLoaiSanPham()
         {
@@ -98,24 +98,6 @@ namespace FashionShopApp.GUI
                 }
 
             }
-        }
-        void loadSanPhamDGV()
-        {
-            sql = "SELECT S.*, TenLoaiSP FROM SanPham S INNER JOIN LoaiSanPham L ON S.IdLoaiSP = L.IdLoaiSP ORDER BY IdSanPham DESC;";
-            DataTable dt = config.ExecuteSelectQuery(sql);
-
-            dgv.DataSource = dt;
-            dgv.Columns[0].HeaderText = "Mã sản phẩm";
-            dgv.Columns[1].HeaderText = "Tên sản phẩm";
-            dgv.Columns[2].HeaderText = "Loại sản phẩm";
-            dgv.Columns[3].HeaderText = "Ảnh";
-
-            dgv.Columns[4].HeaderText = "Giới tính";
-            dgv.Columns[5].HeaderText = "Địa chỉ";
-            dgv.Columns[6].HeaderText = "Số ĐT";
-            dgv.Columns[7].HeaderText = "Email";
-            dgv.AllowUserToAddRows = false;
-
         }
         private void lsv_SanPham_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -259,7 +241,9 @@ namespace FashionShopApp.GUI
 
             if (confirmationResult == DialogResult.Yes)
             {
-                sql = string.Format("UPDATE SanPham SET TenSanPham = N'{0}', IdLoaiSP = {1}, AnhSP = '{2}', AnhSPChiTiet1 = '{3}', AnhSPChiTiet2 = '{4}', GiaBan = {5}, GiamGia = {6}, SoLuongDanhGia = {7}, NoiDungSanPham = N'{8}', DanhGiaSanPham = N'{9}', ThanhToanVanChuyen = N'{10}', TonTai = {11} WHERE IdSanPham = {12}",
+                if(cbo_LoaiSanPham.SelectedValue != null && cbo_TonTai.SelectedValue!=null)
+                {
+                    sql = string.Format("UPDATE SanPham SET TenSanPham = N'{0}', IdLoaiSP = {1}, AnhSP = '{2}', AnhSPChiTiet1 = '{3}', AnhSPChiTiet2 = '{4}', GiaBan = {5}, GiamGia = {6}, SoLuongDanhGia = {7}, NoiDungSanPham = N'{8}', DanhGiaSanPham = N'{9}', ThanhToanVanChuyen = N'{10}', TonTai = {11} WHERE IdSanPham = {12}",
                     txt_TenSanPham.Text,
                     cbo_LoaiSanPham.SelectedValue.ToString(),
                     imagePath1,
@@ -273,7 +257,7 @@ namespace FashionShopApp.GUI
                     txt_ThanhToanVanChuyen.Text,
                     cbo_TonTai.SelectedValue.ToString(),
                     txt_IdSanPham.Text);
-
+                }    
                 if (config.ExecuteNonQuery(sql))
                 {
                     MessageBox.Show("Cập nhập thông tin sản phẩm thành công", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -284,12 +268,14 @@ namespace FashionShopApp.GUI
                 }
                 LoadListSanPham();
             }
-
+            
         }
 
         private void btnThemSanPham_Click(object sender, EventArgs e)
         {
-            sql = string.Format("INSERT INTO SanPham VALUES (N'{0}',{1},'{2}','{3}','{4}',{5},{6},{7},N'{8}',N'{9}',N'{10}',1);",
+            if (cbo_LoaiSanPham.SelectedValue != null && cbo_TonTai.SelectedValue != null)
+            {
+                sql = string.Format("INSERT INTO SanPham VALUES (N'{0}',{1},'{2}','{3}','{4}',{5},{6},{7},N'{8}',N'{9}',N'{10}',1);",
                 txt_TenSanPham.Text,
                 cbo_LoaiSanPham.SelectedValue.ToString(),
                 imagePath1,
@@ -301,7 +287,7 @@ namespace FashionShopApp.GUI
                 txt_NoiDungSanPham.Text,
                 txt_DanhGiaSanPham.Text,
                 txt_ThanhToanVanChuyen.Text);
-
+            }
             if (config.ExecuteNonQuery(sql))
             {
                 MessageBox.Show("Thêm sản phẩm thành công", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -313,7 +299,26 @@ namespace FashionShopApp.GUI
             LoadListSanPham();
         }
 
-
+        private void btn_XoaSp_Click(object sender, EventArgs e)
+        {
+            if(string.IsNullOrEmpty(txt_IdSanPham.Text))
+            {
+                MessageBox.Show("Chọn sản phẩm muốn xoá", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                sql = string.Format("delete SanPham where IdSanPham = {0};", txt_IdSanPham.Text);
+                if (config.ExecuteNonQuery(sql))
+                {
+                    MessageBox.Show("Xoá sản phẩm thành công", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Xoá sản phẩm không thành công", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            LoadListSanPham();
+        }
     }
 
 }

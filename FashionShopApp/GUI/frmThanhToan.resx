@@ -194,6 +194,201 @@
   <data name="&gt;&gt;txt_IdNhanVien.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="&gt;&gt;txt_IdSanPham.Name" xml:space="preserve">
+    <value>txt_IdSanPham</value>
+  </data>
+  <data name="&gt;&gt;txt_IdSanPham.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txt_IdSanPham.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;txt_IdSanPham.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+    <value>label2</value>
+  </data>
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ptb_SanPham.Name" xml:space="preserve">
+    <value>ptb_SanPham</value>
+  </data>
+  <data name="&gt;&gt;ptb_SanPham.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ptb_SanPham.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;ptb_SanPham.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;nmud_GiamGia.Name" xml:space="preserve">
+    <value>nmud_GiamGia</value>
+  </data>
+  <data name="&gt;&gt;nmud_GiamGia.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nmud_GiamGia.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;nmud_GiamGia.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;nmud_SoLuong.Name" xml:space="preserve">
+    <value>nmud_SoLuong</value>
+  </data>
+  <data name="&gt;&gt;nmud_SoLuong.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nmud_SoLuong.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;nmud_SoLuong.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;btnThemSanPham.Name" xml:space="preserve">
+    <value>btnThemSanPham</value>
+  </data>
+  <data name="&gt;&gt;btnThemSanPham.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnThemSanPham.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;btnThemSanPham.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;cbo_TenSanPham.Name" xml:space="preserve">
+    <value>cbo_TenSanPham</value>
+  </data>
+  <data name="&gt;&gt;cbo_TenSanPham.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbo_TenSanPham.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;cbo_TenSanPham.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;txt_ThanhTien.Name" xml:space="preserve">
+    <value>txt_ThanhTien</value>
+  </data>
+  <data name="&gt;&gt;txt_ThanhTien.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txt_ThanhTien.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;txt_ThanhTien.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;txt_DonGia.Name" xml:space="preserve">
+    <value>txt_DonGia</value>
+  </data>
+  <data name="&gt;&gt;txt_DonGia.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txt_DonGia.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;txt_DonGia.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;label15.Name" xml:space="preserve">
+    <value>label15</value>
+  </data>
+  <data name="&gt;&gt;label15.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label15.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;label15.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;label14.Name" xml:space="preserve">
+    <value>label14</value>
+  </data>
+  <data name="&gt;&gt;label14.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label14.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;label14.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;label13.Name" xml:space="preserve">
+    <value>label13</value>
+  </data>
+  <data name="&gt;&gt;label13.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label13.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;label13.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;label12.Name" xml:space="preserve">
+    <value>label12</value>
+  </data>
+  <data name="&gt;&gt;label12.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label12.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;label12.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;label11.Name" xml:space="preserve">
+    <value>label11</value>
+  </data>
+  <data name="&gt;&gt;label11.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label11.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="groupBox2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.2pt</value>
+  </data>
+  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>30, 63</value>
+  </data>
+  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>907, 237</value>
+  </data>
+  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>44</value>
+  </data>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>Thông tin các mặt hàng</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="txt_IdSanPham.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 13.8pt</value>
   </data>
@@ -602,33 +797,6 @@
   </data>
   <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
     <value>13</value>
-  </data>
-  <data name="groupBox2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.2pt</value>
-  </data>
-  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>30, 63</value>
-  </data>
-  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>907, 237</value>
-  </data>
-  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
-    <value>44</value>
-  </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>Thông tin các mặt hàng</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="cbo_PtThanhToan.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 12pt</value>
@@ -1080,6 +1248,57 @@
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
+  <data name="&gt;&gt;label20.Name" xml:space="preserve">
+    <value>label20</value>
+  </data>
+  <data name="&gt;&gt;label20.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label20.Parent" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="&gt;&gt;label20.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;cbo_ChiNhanh.Name" xml:space="preserve">
+    <value>cbo_ChiNhanh</value>
+  </data>
+  <data name="&gt;&gt;cbo_ChiNhanh.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbo_ChiNhanh.Parent" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="&gt;&gt;cbo_ChiNhanh.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="groupBox3.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.2pt</value>
+  </data>
+  <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>974, 63</value>
+  </data>
+  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>546, 63</value>
+  </data>
+  <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
+    <value>53</value>
+  </data>
+  <data name="groupBox3.Text" xml:space="preserve">
+    <value>Khu vực</value>
+  </data>
+  <data name="&gt;&gt;groupBox3.Name" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="&gt;&gt;groupBox3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox3.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="label20.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1136,33 +1355,6 @@
   </data>
   <data name="&gt;&gt;cbo_ChiNhanh.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="groupBox3.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.2pt</value>
-  </data>
-  <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>974, 63</value>
-  </data>
-  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>546, 63</value>
-  </data>
-  <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
-    <value>53</value>
-  </data>
-  <data name="groupBox3.Text" xml:space="preserve">
-    <value>Khu vực</value>
-  </data>
-  <data name="&gt;&gt;groupBox3.Name" xml:space="preserve">
-    <value>groupBox3</value>
-  </data>
-  <data name="&gt;&gt;groupBox3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox3.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
-    <value>4</value>
   </data>
   <data name="label18.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1401,54 +1593,6 @@
   <data name="&gt;&gt;btnTaoHoaDon.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
-  <data name="colIdSanPham.Text" xml:space="preserve">
-    <value>Mã sản phẩm</value>
-  </data>
-  <data name="colIdSanPham.Width" type="System.Int32, mscorlib">
-    <value>135</value>
-  </data>
-  <data name="colTenSanPham.Text" xml:space="preserve">
-    <value>Tên sản phẩm</value>
-  </data>
-  <data name="colTenSanPham.Width" type="System.Int32, mscorlib">
-    <value>171</value>
-  </data>
-  <data name="colDonGia.Text" xml:space="preserve">
-    <value>Đơn giá</value>
-  </data>
-  <data name="colDonGia.Width" type="System.Int32, mscorlib">
-    <value>125</value>
-  </data>
-  <data name="colSoLuong.Text" xml:space="preserve">
-    <value>Số lượng</value>
-  </data>
-  <data name="colSoLuong.Width" type="System.Int32, mscorlib">
-    <value>148</value>
-  </data>
-  <data name="colGiamGia.Text" xml:space="preserve">
-    <value>Giảm giá</value>
-  </data>
-  <data name="colGiamGia.Width" type="System.Int32, mscorlib">
-    <value>128</value>
-  </data>
-  <data name="colThanhTien.Text" xml:space="preserve">
-    <value>Thành tiền</value>
-  </data>
-  <data name="colThanhTien.Width" type="System.Int32, mscorlib">
-    <value>199</value>
-  </data>
-  <data name="lsvSanPham.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 12pt</value>
-  </data>
-  <data name="lsvSanPham.Location" type="System.Drawing.Point, System.Drawing">
-    <value>34, 26</value>
-  </data>
-  <data name="lsvSanPham.Size" type="System.Drawing.Size, System.Drawing">
-    <value>851, 239</value>
-  </data>
-  <data name="lsvSanPham.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
   <data name="&gt;&gt;lsvSanPham.Name" xml:space="preserve">
     <value>lsvSanPham</value>
   </data>
@@ -1487,6 +1631,66 @@
   </data>
   <data name="&gt;&gt;groupBox4.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="lsvSanPham.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
+  </data>
+  <data name="lsvSanPham.Location" type="System.Drawing.Point, System.Drawing">
+    <value>34, 26</value>
+  </data>
+  <data name="lsvSanPham.Size" type="System.Drawing.Size, System.Drawing">
+    <value>851, 239</value>
+  </data>
+  <data name="lsvSanPham.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;lsvSanPham.Name" xml:space="preserve">
+    <value>lsvSanPham</value>
+  </data>
+  <data name="&gt;&gt;lsvSanPham.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lsvSanPham.Parent" xml:space="preserve">
+    <value>groupBox4</value>
+  </data>
+  <data name="&gt;&gt;lsvSanPham.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="colIdSanPham.Text" xml:space="preserve">
+    <value>Mã sản phẩm</value>
+  </data>
+  <data name="colIdSanPham.Width" type="System.Int32, mscorlib">
+    <value>135</value>
+  </data>
+  <data name="colTenSanPham.Text" xml:space="preserve">
+    <value>Tên sản phẩm</value>
+  </data>
+  <data name="colTenSanPham.Width" type="System.Int32, mscorlib">
+    <value>171</value>
+  </data>
+  <data name="colDonGia.Text" xml:space="preserve">
+    <value>Đơn giá</value>
+  </data>
+  <data name="colDonGia.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
+  <data name="colSoLuong.Text" xml:space="preserve">
+    <value>Số lượng</value>
+  </data>
+  <data name="colSoLuong.Width" type="System.Int32, mscorlib">
+    <value>148</value>
+  </data>
+  <data name="colGiamGia.Text" xml:space="preserve">
+    <value>Giảm giá</value>
+  </data>
+  <data name="colGiamGia.Width" type="System.Int32, mscorlib">
+    <value>128</value>
+  </data>
+  <data name="colThanhTien.Text" xml:space="preserve">
+    <value>Thành tiền</value>
+  </data>
+  <data name="colThanhTien.Width" type="System.Int32, mscorlib">
+    <value>199</value>
   </data>
   <data name="groupBox5.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10.2pt</value>

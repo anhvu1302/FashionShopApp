@@ -46,6 +46,7 @@
             this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btn_XoaSp = new System.Windows.Forms.Button();
             this.txt_ThanhToanVanChuyen = new System.Windows.Forms.TextBox();
             this.cbo_LoaiSanPham = new System.Windows.Forms.ComboBox();
             this.btn_Reset = new System.Windows.Forms.Button();
@@ -76,14 +77,12 @@
             this.txt_IdSanPham = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.dgv = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmud_GiamGia)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptb_Image3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptb_Image2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptb_Image1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -100,7 +99,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.dgv);
             this.groupBox1.Controls.Add(this.lsv_SanPham);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(18, 387);
@@ -202,6 +200,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btn_XoaSp);
             this.groupBox2.Controls.Add(this.txt_ThanhToanVanChuyen);
             this.groupBox2.Controls.Add(this.cbo_LoaiSanPham);
             this.groupBox2.Controls.Add(this.btn_Reset);
@@ -238,6 +237,24 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thông tin sản phẩm";
             // 
+            // btn_XoaSp
+            // 
+            this.btn_XoaSp.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btn_XoaSp.FlatAppearance.BorderSize = 0;
+            this.btn_XoaSp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_XoaSp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.btn_XoaSp.Image = global::FashionShopApp.Properties.Resources.delete;
+            this.btn_XoaSp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_XoaSp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btn_XoaSp.Location = new System.Drawing.Point(1386, 262);
+            this.btn_XoaSp.Name = "btn_XoaSp";
+            this.btn_XoaSp.Size = new System.Drawing.Size(103, 37);
+            this.btn_XoaSp.TabIndex = 33;
+            this.btn_XoaSp.Text = "Xóa";
+            this.btn_XoaSp.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btn_XoaSp.UseVisualStyleBackColor = false;
+            this.btn_XoaSp.Click += new System.EventHandler(this.btn_XoaSp_Click);
+            // 
             // txt_ThanhToanVanChuyen
             // 
             this.txt_ThanhToanVanChuyen.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -269,7 +286,7 @@
             this.btn_Reset.Image = ((System.Drawing.Image)(resources.GetObject("btn_Reset.Image")));
             this.btn_Reset.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btn_Reset.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btn_Reset.Location = new System.Drawing.Point(813, 271);
+            this.btn_Reset.Location = new System.Drawing.Point(656, 262);
             this.btn_Reset.Name = "btn_Reset";
             this.btn_Reset.Size = new System.Drawing.Size(121, 37);
             this.btn_Reset.TabIndex = 29;
@@ -287,7 +304,7 @@
             this.btn_CapNhat.Image = global::FashionShopApp.Properties.Resources.updated;
             this.btn_CapNhat.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btn_CapNhat.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btn_CapNhat.Location = new System.Drawing.Point(1002, 271);
+            this.btn_CapNhat.Location = new System.Drawing.Point(845, 262);
             this.btn_CapNhat.Name = "btn_CapNhat";
             this.btn_CapNhat.Size = new System.Drawing.Size(213, 37);
             this.btn_CapNhat.TabIndex = 28;
@@ -305,7 +322,7 @@
             this.btnThemSanPham.Image = global::FashionShopApp.Properties.Resources.add;
             this.btnThemSanPham.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnThemSanPham.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnThemSanPham.Location = new System.Drawing.Point(1282, 271);
+            this.btnThemSanPham.Location = new System.Drawing.Point(1125, 262);
             this.btnThemSanPham.Name = "btnThemSanPham";
             this.btnThemSanPham.Size = new System.Drawing.Size(195, 37);
             this.btnThemSanPham.TabIndex = 27;
@@ -555,16 +572,6 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Mã sản phẩm";
             // 
-            // dgv
-            // 
-            this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv.Location = new System.Drawing.Point(410, 71);
-            this.dgv.Name = "dgv";
-            this.dgv.RowHeadersWidth = 51;
-            this.dgv.RowTemplate.Height = 24;
-            this.dgv.Size = new System.Drawing.Size(979, 140);
-            this.dgv.TabIndex = 1;
-            // 
             // frmSanPham
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -584,7 +591,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ptb_Image3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptb_Image2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptb_Image1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -639,6 +645,6 @@
         private System.Windows.Forms.ComboBox cbo_LoaiSanPham;
         private System.Windows.Forms.TextBox txt_ThanhToanVanChuyen;
         private System.Windows.Forms.Button btn_Reset;
-        private System.Windows.Forms.DataGridView dgv;
+        private System.Windows.Forms.Button btn_XoaSp;
     }
 }

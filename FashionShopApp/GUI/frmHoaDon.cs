@@ -13,7 +13,7 @@ namespace FashionShopApp.GUI
 {
     public partial class frmHoaDon : Form
     {
-        SQLConfig config = new SQLConfig();
+        SQLConfig config = new SQLConfig(NguoiDungHienTai.CurentUser.nguoiDung.TenTaiKhoan, NguoiDungHienTai.CurentUser.nguoiDung.MatKhau);
         string sql;
         public frmHoaDon()
         {
@@ -325,24 +325,34 @@ namespace FashionShopApp.GUI
         }
         private void cbo_TenSanPham_SelectedValueChanged(object sender, EventArgs e)
         {
-            if (cbo_TenSanPham.SelectedValue != null)
+            if (cbo_TenSanPham.SelectedIndex != -1)
             {
-                sql = string.Format("SELECT GiaBan FROM SanPham WHERE IdSanPham = {0}", cbo_TenSanPham.SelectedValue);
-                DataTable dataTable = config.ExecuteSelectQuery(sql);
-
-                if (dataTable.Rows.Count > 0)
+                if (!cbo_TenSanPham.SelectedValue.ToString().Contains("{") || string.IsNullOrEmpty(cbo_TenSanPham.Text))
                 {
-                    foreach (DataRow row in dataTable.Rows)
+                    if (cbo_TenSanPham.SelectedValue != null)
                     {
-                        txt_DonGia.Text = row[0].ToString();
+                        sql = string.Format("SELECT GiaBan FROM SanPham WHERE IdSanPham = {0}", cbo_TenSanPham.SelectedValue);
+                        DataTable dataTable = config.ExecuteSelectQuery(sql);
+
+                        if (dataTable.Rows.Count > 0)
+                        {
+                            foreach (DataRow row in dataTable.Rows)
+                            {
+                                txt_DonGia.Text = row[0].ToString();
+                            }
+                        }
                     }
+                    else
+                        txt_DonGia.Text = null;
                 }
             }
-            else
-                txt_DonGia.Text = null;
 
         }
 
-
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            frmReportHoaDon rptHD = new frmReportHoaDon();
+            rptHD.ShowDialog();
+        }
     }
 }

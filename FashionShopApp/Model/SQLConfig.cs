@@ -4,13 +4,20 @@
     using System.Data;
     using System.Data.SqlClient;
     using System.Drawing;
+    using System.Windows.Forms;
 
     public class SQLConfig
     {
         //SqlConnection connection = new SqlConnection("Server=VANANH;Database=QL_FashionShop;User Id=sa;Password=123;");
-        SqlConnection connection = new SqlConnection("Data Source=DESKTOP-1LB6J34\\SQLEXPRESS;Initial Catalog=QL_FashionShop;Integrated Security=True");
+        //SqlConnection connection = new SqlConnection("Data Source=DESKTOP-1LB6J34\\SQLEXPRESS;Initial Catalog=FashionShopManagement;Integrated Security=True");
+        private SqlConnection connection;
 
-        //Truy vấn
+        // Phương thức khởi tạo với chuỗi kết nối
+        public SQLConfig(string username, string password)
+        {
+            connection = new SqlConnection(string.Format("Server=DESKTOP-1LB6J34\\SQLEXPRESS;Database=FashionShopManagement;User Id={0};Password={1};", username, password));
+        }
+
         public bool ExecuteNonQuery(string query)
         {
             try
@@ -23,11 +30,11 @@
             }
             catch (SqlException ex)
             {
-                Console.WriteLine($"Lỗi SQL: {ex.Message}");
+                MessageBox.Show($"Lỗi SQL: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Lỗi: {ex.Message}");
+                MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -35,6 +42,7 @@
             }
             return false;
         }
+
         // Lấy bảng dữ liệu
         public DataTable ExecuteSelectQuery(string query)
         {
@@ -48,11 +56,11 @@
             }
             catch (SqlException ex)
             {
-                Console.WriteLine($"Lỗi SQL: {ex.Message}");
+                MessageBox.Show($"Lỗi SQL: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Lỗi: {ex.Message}");
+                MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -60,7 +68,8 @@
             }
             return dataTable;
         }
-        //Lấy 1 kiểu dữ liệu
+
+        // Lấy 1 kiểu dữ liệu
         public object ExecuteScalar(string query)
         {
             object result = null;
@@ -73,11 +82,11 @@
             }
             catch (SqlException ex)
             {
-                Console.WriteLine($"Lỗi SQL: {ex.Message}");
+                MessageBox.Show($"Lỗi SQL: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Lỗi: {ex.Message}");
+                MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -85,6 +94,38 @@
             }
             return result;
         }
-    }
 
+        // Execute Stored Procedure
+        public bool ExecuteStoredProcedure(string storedProcedureName, SqlParameter[] parameters)
+        {
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(storedProcedureName, connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                if (parameters != null)
+                {
+                    command.Parameters.AddRange(parameters);
+                }
+
+                int rowsAffected = command.ExecuteNonQuery();
+
+                return rowsAffected > 0;
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"Lỗi SQL: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return false;
+        }
+    }
 }

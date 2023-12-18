@@ -13,7 +13,7 @@ namespace FashionShopApp
 {
     public partial class frmDangNhap : Form
     {
-        SQLConfig config = new SQLConfig();
+        SQLConfig config = new SQLConfig("sa","123");
         static string sql;
         public frmDangNhap()
         {
@@ -62,6 +62,7 @@ namespace FashionShopApp
                             {
                                 NguoiDungHienTai.CurentUser.nguoiDung.IdNguoiDung = int.Parse(row[0].ToString());
                                 NguoiDungHienTai.CurentUser.nguoiDung.TenTaiKhoan = row[1].ToString();
+                                NguoiDungHienTai.CurentUser.nguoiDung.MatKhau = row[2].ToString();
                                 NguoiDungHienTai.CurentUser.nguoiDung.IdVaiTro = int.Parse(row[3].ToString());
                                 NguoiDungHienTai.CurentUser.nguoiDung.TonTai = bool.Parse(row[4].ToString());
                                 NguoiDungHienTai.CurentUser.nguoiDung.Cam = bool.Parse(row[5].ToString());
@@ -69,12 +70,12 @@ namespace FashionShopApp
                             }
                         }
 
-                        if (NguoiDungHienTai.CurentUser.tenVaiTro == "Khách hàng")
-                        {
-                            MessageBox.Show("Bạn không có quyền truy cập vào hệ thống này.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        else
-                        {
+                        //if (NguoiDungHienTai.CurentUser.tenVaiTro == "Khách hàng")
+                        //{
+                        //    MessageBox.Show("Bạn không có quyền truy cập vào hệ thống này.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //}
+                        //else
+                        //{
                             if (NguoiDungHienTai.CurentUser.nguoiDung.TonTai == true)
                             {
                                 if (NguoiDungHienTai.CurentUser.nguoiDung.Cam == false)
@@ -92,12 +93,12 @@ namespace FashionShopApp
                             {
                                 MessageBox.Show("Tài khoản đã bị xóa! Vui lòng liên hệ quản trị viên.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
-                        }
+                        //}
 
                     }
                     else
                     {
-                        MessageBox.Show("Tài khoản không tồn tại! Vui lòng liên hệ quản trị viên.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Tài khoản hoặc mật khẩu không chính xác.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else

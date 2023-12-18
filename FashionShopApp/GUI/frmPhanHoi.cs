@@ -14,7 +14,7 @@ namespace FashionShopApp
 {
     public partial class frmPhanHoi : Form
     {
-        SQLConfig config = new SQLConfig();
+        SQLConfig config = new SQLConfig(NguoiDungHienTai.CurentUser.nguoiDung.TenTaiKhoan, NguoiDungHienTai.CurentUser.nguoiDung.MatKhau);
         string sql;
         public frmPhanHoi()
         {
@@ -26,13 +26,16 @@ namespace FashionShopApp
             DataTable dt = config.ExecuteSelectQuery(sql);
 
             dgv.DataSource = dt;
-            dgv.Columns[0].HeaderText = "Mã Phản hồi";
-            dgv.Columns[1].HeaderText = "Mã Khách Hàng";
-            dgv.Columns[2].HeaderText = "Tên Khách Hàng";
-            dgv.Columns[3].HeaderText = "Số điện thoại";
-            dgv.Columns[4].HeaderText = "Vấn đề";
-            dgv.Columns[5].HeaderText = "Nội dung vấn đề";
-            dgv.Columns[6].HeaderText = "Thời gian gửi phản hồi";
+            if (dt.Rows.Count > 0)
+            {
+                dgv.Columns[0].HeaderText = "Mã Phản hồi";
+                dgv.Columns[1].HeaderText = "Mã Khách Hàng";
+                dgv.Columns[2].HeaderText = "Tên Khách Hàng";
+                dgv.Columns[3].HeaderText = "Số điện thoại";
+                dgv.Columns[4].HeaderText = "Vấn đề";
+                dgv.Columns[5].HeaderText = "Nội dung vấn đề";
+                dgv.Columns[6].HeaderText = "Thời gian gửi phản hồi";
+            }
             dgv.AllowUserToAddRows = false;
         }
         void loadPhanHoi()
@@ -78,7 +81,7 @@ namespace FashionShopApp
 
             if (confirmationResult == DialogResult.Yes)
             {
-                sql = string.Format("UPDATE PhanHoi SET SoDienThoai='{0}' ,VanDe = N'{1}',NoiDungVanDe=N'{2}',ThoiGianPhanHoi = Getdate() WHERE IdPhanHoi = {4} ", txt_sdt.Text, cboVanDe.Text, r_NDVanDe.Text, dtp_phanhoi.Text,  txt_maPhanHoi.Text);
+                sql = string.Format("UPDATE PhanHoi SET SoDienThoai='{0}' ,VanDe = N'{1}',NoiDungVanDe=N'{2}' WHERE IdPhanHoi = '{3}' ", txt_sdt.Text, cboVanDe.Text, r_NDVanDe.Text,  txt_maPhanHoi.Text);
                 config.ExecuteNonQuery(sql);
                 loadDanhSachPhanHoi();
             }

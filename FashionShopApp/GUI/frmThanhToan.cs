@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace FashionShopApp.GUI
 {
     public partial class frmThanhToan : Form
     {
-        SQLConfig config = new SQLConfig();
+        SQLConfig config = new SQLConfig(NguoiDungHienTai.CurentUser.nguoiDung.TenTaiKhoan, NguoiDungHienTai.CurentUser.nguoiDung.MatKhau);
         string sql;
         private Timer timer = new Timer();
         public frmThanhToan()
@@ -31,6 +32,7 @@ namespace FashionShopApp.GUI
             timer.Interval = 1000;
             timer.Tick += Timer_Tick;
             timer.Start();
+
         }
         private void Timer_Tick(object sender, EventArgs e)
         {
@@ -47,7 +49,7 @@ namespace FashionShopApp.GUI
                 {
                     items.Add(new { Text = dr[1].ToString(), Value = dr[0] });
                 }
-
+                cbo_TenSanPham.SelectedIndex = -1;
                 cbo_TenSanPham.DataSource = items;
                 cbo_TenSanPham.DisplayMember = "Text";
                 cbo_TenSanPham.ValueMember = "Value";
@@ -57,7 +59,6 @@ namespace FashionShopApp.GUI
                 items.Add(new { Text = "Chưa có sản phẩm", Value = -1 });
             }
 
-            cbo_TenSanPham.SelectedIndex = -1;
         }
         public void LoadCboChiNhanh()
         {
@@ -166,10 +167,9 @@ namespace FashionShopApp.GUI
         }
         public void cbo_TenSanPham_SelectedValueChanged(object sender, EventArgs e)
         {
-            try
+            if(cbo_TenSanPham.SelectedIndex != -1)
             {
-                ComboBox cmb = sender as ComboBox;
-                if (cmb.SelectedItem != null)
+                if (!cbo_TenSanPham.SelectedValue.ToString().Contains("{") || string.IsNullOrEmpty(cbo_TenSanPham.Text))
                 {
                     sql = string.Format("SELECT IdLoaiSP, AnhSP, GiaBan, GiamGia FROM SanPham WHERE IdSanPham = {0}", cbo_TenSanPham.SelectedValue);
                     DataTable dataTable = config.ExecuteSelectQuery(sql);
@@ -188,15 +188,7 @@ namespace FashionShopApp.GUI
                         }
                     }
                 }
-            }
-            catch (SqlException ex)
-            {
-                Console.WriteLine($"Lỗi SQL: {ex.Message}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Lỗi: {ex.Message}");
-            }
+            }    
         }
         private void btnThemSanPham_Click(object sender, EventArgs e)
         {
@@ -245,7 +237,7 @@ namespace FashionShopApp.GUI
         {
             if (txt_TongTien.Text != "" && txt_TienKhachDua.Text != "")
             {
-                string tongTienStr = txt_TongTien.Text.Replace("đ", "").Replace(".", "");
+                string tongTienStr = txt_TongTien.Text.Replace("đ", "").Replace(",", "");
                 int tongTienInt = int.Parse(tongTienStr);
                 txt_TienThoi.Text = (int.Parse(txt_TienKhachDua.Text) - tongTienInt).ToString("#,##0đ");
             }
@@ -293,6 +285,7 @@ namespace FashionShopApp.GUI
                     }
                     else
                     {
+                        bool success = false;
                         string tongTienStr = txt_TongTien.Text.Replace("đ", "").Replace(".", "");
                         if (lsvSanPham.Items.Count > 0)
                         {
@@ -303,21 +296,39 @@ namespace FashionShopApp.GUI
                             else
                                 sql = String.Format("INSERT INTO HoaDon VALUES ({0},{1},null,N'{2}',GETDATE()) SELECT SCOPE_IDENTITY() AS IdHoaDon;", txt_IdNhanVien.Text, cbo_ChiNhanh.SelectedValue, cbo_PtThanhToan.Text);
                             object result = config.ExecuteScalar(sql);
-                            int id = int.Parse(result.ToString());
-                            if (id > 0)
+                            if(result == null)
                             {
-                                foreach (ListViewItem item in lsvSanPham.Items)
-                                {
-                                    string sql2 = "INSERT INTO ChiTietHoaDon VALUES ('" + id + "','" + item.SubItems[0].Text + "'," + item.SubItems[3].Text + "," + item.SubItems[5].Text + ");";
-                                    config.ExecuteNonQuery(sql2);
-                                }
+                                success = false;
                             }
+                            else
+                            {
+                                int id = int.Parse(result.ToString());
+                                if (id > 0)
+                                {
+                                    foreach (ListViewItem item in lsvSanPham.Items)
+                                    {
+                                        string sql2 = "INSERT INTO ChiTietHoaDon VALUES ('" + id + "','" + item.SubItems[0].Text + "'," + item.SubItems[3].Text + "," + item.SubItems[5].Text + ");";
+
+                                        if (config.ExecuteNonQuery(sql2))
+                                            success = true;
+                                    }
+                                }
+                            }    
 
 
                         }
-                        InHoaDon();
-                        MessageBox.Show("Đã xuất hoá đơn thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        ResetHoaDon();
+                        if(success)
+                        {
+                            InHoaDon();
+                            MessageBox.Show("Đã xuất hoá đơn thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            ResetHoaDon();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Đã xuất hoá đơn không thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        }
+
                     }
                 }
             }
@@ -491,6 +502,20 @@ namespace FashionShopApp.GUI
             int x = (int)((pageWidth - textSize.Width) / 2);
             return x;
         }
+        private string GetDiaChiChiNhanh(string tenChiNhanh)
+        {
+            string diaChi = string.Empty;
+            sql = string.Format("SELECT DiaChi FROM ChiNhanh WHERE TenChiNhanh = N'{0}'", tenChiNhanh);
+            DataTable dataTable = config.ExecuteSelectQuery(sql);
+            if (dataTable.Rows.Count > 0)
+            {
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    diaChi = row[0].ToString();
+                }
+            }
+            return diaChi;
+        }
         private void InHoaDon()
         {
             try
@@ -509,6 +534,8 @@ namespace FashionShopApp.GUI
                     using (FileStream fs = new FileStream(filePath, FileMode.Create))
                     {
                     }
+                    if (txt_SoDienThoai.Text != null)
+                        SendInvoiceByEmail(GetEmailCustomer(txt_SoDienThoai.Text), filePath);
                 }
             }
             catch (Exception ex)
@@ -517,6 +544,65 @@ namespace FashionShopApp.GUI
                 Console.WriteLine($"Lỗi: {ex.Message}");
             }
 
+        }
+
+        private string GetEmailCustomer(string phoneNum)
+        {
+            sql = string.Format("select Email from KhachHang WHERE SoDienThoai = '{0}'", phoneNum);
+            string mail = null;
+            DataTable dt = config.ExecuteSelectQuery(sql);
+            if (dt.Columns.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    mail = dr[0].ToString();
+                }
+            }
+            return mail;
+        }
+        private void SendInvoiceByEmail(string customerEmail, string attachmentFilePath)
+        {
+            try
+            {
+                // Sender's email address and credentials
+                string senderEmail = "hotroaeon@gmail.com";
+                string appPassword = "ffie uuus uvnz xpbb";
+
+                // SMTP server details for Gmail
+                string smtpHost = "smtp.gmail.com";
+                int smtpPort = 587;
+
+
+                // Create a new SmtpClient instance
+                SmtpClient smtpClient = new SmtpClient(smtpHost, smtpPort);
+                smtpClient.UseDefaultCredentials = false;
+                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtpClient.Credentials = new System.Net.NetworkCredential(senderEmail, appPassword);
+                smtpClient.EnableSsl = true;
+
+                // Create a new MailMessage
+                MailMessage mailMessage = new MailMessage();
+                mailMessage.From = new MailAddress(senderEmail);
+                mailMessage.To.Add(customerEmail);
+                mailMessage.Subject = "Hóa đơn mua hàng của bạn";
+                mailMessage.Body = "Cám ơn vì đã mua hàng. Vui lòng tìm hóa đơn đính kèm.";
+
+                // Attach the invoice PDF file
+                Attachment attachment = new Attachment(attachmentFilePath);
+                mailMessage.Attachments.Add(attachment);
+
+                // Send the email
+                smtpClient.Send(mailMessage);
+
+                // Dispose of the attachment
+                //attachment.Dispose();
+
+                MessageBox.Show("Invoice sent successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error sending email: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

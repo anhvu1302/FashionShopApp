@@ -77,6 +77,7 @@
             this.cbo_TenSanPham = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnPrint = new System.Windows.Forms.Button();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -112,13 +113,11 @@
             // 
             // columnHeader2
             // 
-            this.columnHeader2.DisplayIndex = 1;
             this.columnHeader2.Text = "Nhân viên";
             this.columnHeader2.Width = 106;
             // 
             // columnHeader3
             // 
-            this.columnHeader3.DisplayIndex = 2;
             this.columnHeader3.Text = "Chi nhánh";
             this.columnHeader3.Width = 136;
             // 
@@ -180,7 +179,7 @@
             this.btn_XoaHoaDon.Image = global::FashionShopApp.Properties.Resources.delete;
             this.btn_XoaHoaDon.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btn_XoaHoaDon.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btn_XoaHoaDon.Location = new System.Drawing.Point(695, 208);
+            this.btn_XoaHoaDon.Location = new System.Drawing.Point(668, 208);
             this.btn_XoaHoaDon.Name = "btn_XoaHoaDon";
             this.btn_XoaHoaDon.Size = new System.Drawing.Size(110, 37);
             this.btn_XoaHoaDon.TabIndex = 35;
@@ -286,6 +285,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.btnPrint);
             this.groupBox3.Controls.Add(this.dtp_NgayXuatHoaDon);
             this.groupBox3.Controls.Add(this.cbo_PtThanhToan);
             this.groupBox3.Controls.Add(this.txt_TongTien);
@@ -647,6 +647,24 @@
             this.label1.TabIndex = 34;
             this.label1.Text = "QUẢN LÝ HÓA ĐƠN";
             // 
+            // btnPrint
+            // 
+            this.btnPrint.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.btnPrint.FlatAppearance.BorderSize = 0;
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrint.Image = ((System.Drawing.Image)(resources.GetObject("btnPrint.Image")));
+            this.btnPrint.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPrint.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnPrint.Location = new System.Drawing.Point(821, 208);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(131, 37);
+            this.btnPrint.TabIndex = 41;
+            this.btnPrint.Text = "Xem In";
+            this.btnPrint.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnPrint.UseVisualStyleBackColor = false;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
             // frmHoaDon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -722,5 +740,6 @@
         private System.Windows.Forms.ComboBox cbo_PtThanhToan;
         private System.Windows.Forms.ComboBox cbo_IdHoaDon;
         private System.Windows.Forms.DateTimePicker dtp_NgayXuatHoaDon;
+        private System.Windows.Forms.Button btnPrint;
     }
 }

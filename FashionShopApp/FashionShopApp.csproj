@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{966C0FEB-5DB6-4128-AD4F-4AE6C62B12CD}</ProjectGuid>
+    <ProjectGuid>{8321779F-4935-47CB-A9A6-8E1D2C6029D5}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>FashionShopApp</RootNamespace>
     <AssemblyName>FashionShopApp</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
@@ -47,11 +51,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GUI\frmPhanHoi.cs">
+    <Compile Include="GUI\frmDangNhap.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\frmPhanHoi.Designer.cs">
-      <DependentUpon>frmPhanHoi.cs</DependentUpon>
+    <Compile Include="GUI\frmDangNhap.Designer.cs">
+      <DependentUpon>frmDangNhap.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\frmHoaDon.cs">
       <SubType>Form</SubType>
@@ -65,6 +69,12 @@
     <Compile Include="GUI\frmKhachHang.designer.cs">
       <DependentUpon>frmKhachHang.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\frmKho.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmKho.Designer.cs">
+      <DependentUpon>frmKho.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\frmLoaiSanPham.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,11 +87,41 @@
     <Compile Include="GUI\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\frmDangNhap.cs">
+    <Compile Include="GUI\frmNhapKho.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\frmDangNhap.Designer.cs">
-      <DependentUpon>frmDangNhap.cs</DependentUpon>
+    <Compile Include="GUI\frmNhapKho.designer.cs">
+      <DependentUpon>frmNhapKho.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmPhanHoi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmPhanHoi.Designer.cs">
+      <DependentUpon>frmPhanHoi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmQLNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmQLNhanVien.designer.cs">
+      <DependentUpon>frmQLNhanVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmQLTaiKhoanNV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmQLTaiKhoanNV.designer.cs">
+      <DependentUpon>frmQLTaiKhoanNV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmReportHoaDon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmReportHoaDon.Designer.cs">
+      <DependentUpon>frmReportHoaDon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmRPHDNK.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmRPHDNK.Designer.cs">
+      <DependentUpon>frmRPHDNK.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\frmSanPham.cs">
       <SubType>Form</SubType>
@@ -95,34 +135,37 @@
     <Compile Include="GUI\frmThanhToan.Designer.cs">
       <DependentUpon>frmThanhToan.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\frmThongKe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmThongKe.Designer.cs">
+      <DependentUpon>frmThongKe.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\frmTK_KhachHang.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUI\frmTK_KhachHang.Designer.cs">
       <DependentUpon>frmTK_KhachHang.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\ChiNhanh.cs" />
-    <Compile Include="Model\ChiTietDonHang.cs" />
-    <Compile Include="Model\ChiTietHoaDonNhapKho.cs" />
-    <Compile Include="Model\DanhGiaSanPham.cs" />
-    <Compile Include="Model\DonHang.cs" />
-    <Compile Include="Model\HoaDon.cs" />
-    <Compile Include="Model\HoaDonNhapKho.cs" />
-    <Compile Include="Model\KhachHang.cs" />
-    <Compile Include="Model\Kho.cs" />
-    <Compile Include="Model\LoaiSanPham.cs" />
-    <Compile Include="Model\LoaiSanPhamCha.cs" />
     <Compile Include="Model\NguoiDung.cs" />
     <Compile Include="Model\NguoiDungHienTai.cs" />
-    <Compile Include="Model\NhanVien.cs" />
-    <Compile Include="Model\PhanHoi.cs" />
-    <Compile Include="Model\SanPham.cs" />
-    <Compile Include="Model\VaiTro.cs" />
+    <Compile Include="Model\SQLConfig.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Model\SQLConfig.cs" />
-    <EmbeddedResource Include="GUI\frmPhanHoi.resx">
-      <DependentUpon>frmPhanHoi.cs</DependentUpon>
+    <Compile Include="rptHoaDon.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptHoaDon.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptTonKho.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptTonKho.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <EmbeddedResource Include="GUI\frmDangNhap.resx">
+      <DependentUpon>frmDangNhap.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmHoaDon.resx">
       <DependentUpon>frmHoaDon.cs</DependentUpon>
@@ -130,14 +173,32 @@
     <EmbeddedResource Include="GUI\frmKhachHang.resx">
       <DependentUpon>frmKhachHang.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmKho.resx">
+      <DependentUpon>frmKho.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmLoaiSanPham.resx">
       <DependentUpon>frmLoaiSanPham.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\frmDangNhap.resx">
-      <DependentUpon>frmDangNhap.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\frmNhapKho.resx">
+      <DependentUpon>frmNhapKho.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmPhanHoi.resx">
+      <DependentUpon>frmPhanHoi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmQLNhanVien.resx">
+      <DependentUpon>frmQLNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmQLTaiKhoanNV.resx">
+      <DependentUpon>frmQLTaiKhoanNV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmReportHoaDon.resx">
+      <DependentUpon>frmReportHoaDon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmRPHDNK.resx">
+      <DependentUpon>frmRPHDNK.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmSanPham.resx">
       <DependentUpon>frmSanPham.cs</DependentUpon>
@@ -145,23 +206,34 @@
     <EmbeddedResource Include="GUI\frmThanhToan.resx">
       <DependentUpon>frmThanhToan.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmThongKe.resx">
+      <DependentUpon>frmThongKe.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmTK_KhachHang.resx">
       <DependentUpon>frmTK_KhachHang.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="rptHoaDon.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptHoaDon.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptTonKho.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptTonKho.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -172,28 +244,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\logo_FashionShop.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\system.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\system1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\user.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\padlock.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\statistics.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\product.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\admin.png" />
     <Content Include="Images\product_img1.jpg" />
     <Content Include="Images\product_img10.jpg" />
     <Content Include="Images\product_img10_compact1.jpg" />
@@ -290,24 +340,36 @@
     <Content Include="Images\product_img9.jpg" />
     <Content Include="Images\product_img9_compact1.jpg" />
     <Content Include="Images\product_img9_compact2.jpg" />
-    <None Include="Resources\add.png" />
-    <Content Include="Resources\bill.png" />
-    <Content Include="Resources\branch.png" />
-    <None Include="Resources\delete.png" />
-    <Content Include="Resources\feedback.png" />
-    <None Include="Resources\icons8-save-30.png" />
-    <None Include="Resources\icons8-sent-30.png" />
-    <Content Include="Resources\logout.png" />
-    <None Include="Resources\logo_shop.png" />
-    <Content Include="Resources\order.png" />
-    <Content Include="Resources\payment_method.png" />
+    <None Include="Resources\warehouse.png" />
+    <None Include="Resources\user.png" />
+    <None Include="Resources\updated.png" />
+    <None Include="Resources\system1.png" />
+    <None Include="Resources\system.png" />
+    <None Include="Resources\statistics.png" />
+    <None Include="Resources\staff.png" />
     <None Include="Resources\reset.png" />
     <None Include="Resources\profile.png" />
-    <Content Include="Resources\staff.png" />
-    <None Include="Resources\updated.png" />
-    <Content Include="Resources\warehouse.png" />
+    <None Include="Resources\product_type.png" />
+    <None Include="Resources\product.png" />
+    <None Include="Resources\payment_method.png" />
+    <None Include="Resources\padlock.png" />
+    <None Include="Resources\order.png" />
+    <None Include="Resources\logout.png" />
+    <None Include="Resources\logo_shop.png" />
+    <None Include="Resources\logo_FashionShop.png" />
+    <None Include="Resources\icons8-sent-30.png" />
+    <None Include="Resources\icons8-save-30.png" />
+    <None Include="Resources\icons8-manage-64.png" />
+    <None Include="Resources\feedback.png" />
+    <None Include="Resources\delete.png" />
     <None Include="Resources\customer.png" />
-    <Content Include="Resources\product_type.png" />
+    <None Include="Resources\branch.png" />
+    <None Include="Resources\bill.png" />
+    <None Include="Resources\admin.png" />
+    <None Include="Resources\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
